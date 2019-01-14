@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 import connector.ConnectionManagerOracle;
 import dto.Employee;
 
@@ -16,13 +18,41 @@ public class EmpDAO extends ConnectionManagerOracle {
 		}
 		return eDAO;
 	}
+	
+	// Execute "SELECT WHERE EMPNO = ?" query
+	public Employee selectByEmpNo(String empno) {
+		ResultSet rs = null;
+		Employee wrap = new Employee();
 		
+		try {
+			String query = "SELECt * FROM EMP WHERE EMPNO = ?";
+			
+			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			pstmt.setString(1, empno);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				wrap.setEMPNO(rs.getInt(1));
+				wrap.setENAME(rs.getString(2));
+				wrap.setJOB(rs.getString(3));
+				wrap.setMGR(rs.getInt(4));
+				wrap.setHIREDATE(rs.getString(5));
+				wrap.setSAL(rs.getDouble(6));
+				wrap.setCOMM(rs.getDouble(7));
+				wrap.setDEPTNO(rs.getInt(8));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return wrap;
+	} // selectByEmpNo() 끝.
+	
 	// Execute "INSERT" query
-	// ex) insert into emp values(7566, 'JONES', 'MANAGER', 7839, to_date('2-4-1981','dd-mm-yyyy'), 2975, null, 20)
-	// empno number(4,0), ename varchar2(10), job varchar2(9), mgr number(4,0), hiredate date, sal number(7,2), comm number(7,2), deptno number(2,0)
-	public static int insert(Employee emp) {
+	public int insert(Employee emp) {
 		try {
 			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'dd-mm-yyyy'), ?, ?, ?)";
+
 			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
 			pstmt.setInt(1, emp.getEMPNO());
 			pstmt.setString(2, emp.getENAME());
@@ -37,6 +67,44 @@ public class EmpDAO extends ConnectionManagerOracle {
 			e.printStackTrace();
 		}
 		
-		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> 제대로 실행된 경우 1이나 0을 반환하니까
-	}
+		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
+	} // insert() 끝.
+	
+	// Execute "UPDATE" query
+	public int update(Employee emp) {
+		try {
+			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'dd-mm-yyyy'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
+					
+			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			pstmt.setString(1, emp.getENAME());
+			pstmt.setString(2, emp.getJOB());
+			pstmt.setInt(3, emp.getMGR());
+			pstmt.setString(4, emp.getHIREDATE());
+			pstmt.setDouble(5, emp.getSAL());
+			pstmt.setDouble(6, emp.getCOMM());
+			pstmt.setInt(7, emp.getDEPTNO());
+			pstmt.setInt(8, emp.getEMPNO());
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
+	} // update() 끝.
+	
+	// Execute "DELETE" query
+	public int delete(String empno) {
+		try {
+			String query = "DELETE FROM EMP WHERE EMPNO = ?";
+			
+			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			pstmt.setString(1, empno);
+			return pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
+	} // delete() 끝.
 }
+
