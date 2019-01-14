@@ -1,0 +1,17 @@
+/* header.jsp's CSS */
+* {padding: 0px; margin: 0px;}
+.header, .header_wrap, .menu_wrap {width: 100%;}
+.header_wrap {background-color: #fefefe;}
+.menu_wrap {border-top: 2px solid lightgray; border-bottom: 2px solid lightgray; background-image: linear-gradient(#fefefe, #ededed);}
+.header_main, .menu_main {width: 1532px; margin: 0px auto;}
+.top {width: 80%; padding: 20px 0px; margin: 0px auto; text-align: center;}
+.top>a {display: block; width: 200px; margin: 0px auto; text-decoration: none; color: darkslategray; font-size: 30px; font-family: Times New Roman;}
+.menu {width: 80%; margin: 0px auto; text-align: center;}
+.menu>ul {display: block; list-style: none;}
+.menu>ul>li {display: inline-block; border: 1px solid darkslateblue; margin-right: -6px; padding: 10px 35px;}
+.menu>ul>li>a {text-decoration: none; color: darkslategray; font-size: 20px;}
+
+/* joinForm.jsp's CSS */
+.joinH1 {margin: 20px; padding: 20px 30px; border-bottom: 2px solid lightgray;}
+.form_wrap {margin: 10px 40px;}
+.form_wrap>form>ul {list-style: none;}
