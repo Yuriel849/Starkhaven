@@ -1,7 +1,8 @@
 # Starkhaven
 
-## A personal project to practice using HTML, CSS, JavaScript, jQuery, and JSP by creating my own website.
-<h3> (This is a new repository to replace the old Starkhaven repository. This new repo was created to make use of the .gitignore file, which unfortunately the old one did not.) </h3>
+<h2> A personal project to practice using HTML, CSS, JavaScript, jQuery, and JSP by creating my own website. </h2>
+
+### (This is a new repository to replace the old Starkhaven repository. This new repo was created to make use of the .gitignore file, which unfortunately the old one did not.)
 
 <br><br><br>
 
