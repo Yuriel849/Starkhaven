@@ -1,17 +1,31 @@
 /* header.jsp's CSS */
 * {padding: 0px; margin: 0px;}
-.header, .header_wrap, .menu_wrap {width: 100%;}
+hr {border: 2px solid lightgray;}
+.header, .header_wrap, .menu_wrap, .body_wrap {width: 100%;}
 .header_wrap {background-color: #fefefe;}
 .menu_wrap {border-top: 2px solid lightgray; border-bottom: 2px solid lightgray; background-image: linear-gradient(#fefefe, #ededed);}
-.header_main, .menu_main {width: 1532px; margin: 0px auto;}
+.header_main, .menu_main, .body_main {width: 1532px; margin: 0px auto;}
 .top {width: 80%; padding: 20px 0px; margin: 0px auto; text-align: center;}
 .top>a {display: block; width: 200px; margin: 0px auto; text-decoration: none; color: darkslategray; font-size: 30px; font-family: Times New Roman;}
 .menu {width: 80%; margin: 0px auto; text-align: center;}
-.menu>ul {display: block; list-style: none;}
-.menu>ul>li {display: inline-block; border: 1px solid darkslateblue; margin-right: -6px; padding: 10px 35px;}
-.menu>ul>li>a {text-decoration: none; color: darkslategray; font-size: 20px;}
+.menu>ul {display: block; list-style: none; margin-left: -6px;}
+.menu>ul>li {display: inline-block; border: 1px solid darkslateblue; margin-right: -6px; padding: 10px 0px;}
+.menu>ul>li>a {text-decoration: none; color: darkslategray; font-size: 20px; padding: 10px 38px;}
 
 /* joinForm.jsp's CSS */
-.joinH1 {margin: 20px; padding: 20px 30px; border-bottom: 2px solid lightgray;}
-.form_wrap {margin: 10px 40px;}
-.form_wrap>form>ul {list-style: none;}
+.body_wrap {margin-top: -20px;}
+.section {width: 80%; margin: 0px auto; background-color: #fefefe;}
+.section>h1 {width: 50%; margin: 20px auto; margin-top: 50px; padding: 30px; font-size: 30px;}
+.form_wrap {width: 50%; margin: 20px auto;}
+.form_wrap ul {list-style: none; margin: 0px auto;}
+.form_wrap ul>li {margin: 0px auto;}
+.form_wrap ul>li>label {display: inline-block; width: 200px; margin: 10px auto; margin-left: 50px; font-size: 20px; font-weight: 900;}
+.form_wrap ul>li>input {display: inline-block; height: 40px; width: 300px; margin: 10px auto; font-size: 20px; font-weight: 500;}
+.sub_li {text-align: center;}
+input[type="submit"] {width: 120px;}
+
+/* myPage.jsp's CSS */
+img.avatar {display: block; width: 300px; height: 300px; border-radius: 50%; margin: 0px auto;}
+.myPage_wrap {width: 50%; margin: 20px auto;}
+.myPage_wrap ul {list-style: none; margin: 20px auto; margin-top: 50px; margin-left: 50px;}
+.myPage_wrap span {display: inline-block; height: 40px; width: 200px; margin: 10px auto; margin-left: 50px; font-size: 20px; font-weight: 900;}

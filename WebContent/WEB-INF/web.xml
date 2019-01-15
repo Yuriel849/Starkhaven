@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>starkhaven</display-name>
-  <!-- 특정 경로를 명시하지 않고 context root로 접근했을 때 접속할 페이지를 찾는 순서
-  	   	 -> 이것이 바로 index.html OR index.jsp를 메인페이지처럼 default page로 인식하는 이유!
-  	   	 -> Deployment Descriptor > Welcome Pages에서도 볼 수 있다 (Welcome Pages에서 안 보이면 제대로 등록되지 않았다는 뜻이다) -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
