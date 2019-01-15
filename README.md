@@ -19,3 +19,7 @@
 ###### > src > handler > JoinHandler.java (자바 파일로 DB와의 연동 및 정상 작동 테스트 목적)
 ###### > WebContent > OpenProject > *
 <br>
+
+#### [과제] ERD 모델링 실습 >>
+###### > ERD
+<br>
