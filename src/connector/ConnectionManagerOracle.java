@@ -48,7 +48,8 @@ public class ConnectionManagerOracle {
 	// 별도로 Connection이 제공되지 않는다면 여기서 Connection을 새로 만들어서 제공한다.
 	Connection getConnection() {
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver"); // JDBC 드라이버를 로딩한다.
+			// Loader 클래스 사용하기에 Class.forName() 불필요!
+//			Class.forName("oracle.jdbc.driver.OracleDriver"); // JDBC 드라이버를 로딩한다.
 			conn = DriverManager.getConnection(dbURL, dbUser, dbPassword); // 데이터베이스와 연결을 하여 그 연결을 "conn" 참조변수로 다룬다.
 		} catch(Exception e) {
 			e.printStackTrace();

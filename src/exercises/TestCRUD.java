@@ -5,7 +5,7 @@ import dto.Employee;
 
 class TestCRUD {
 	public static void main(String[] args) {
-		EmpDAO eDAO = EmpDAO.getInstance();
+		EmpDAO eDAO = new EmpDAO();
 
 		// Test "INSERT"
 		Employee testee = new Employee(1234, "TESTEE", "TEST", 5678, "1-1-2000", 500.0, 500.0, 10);

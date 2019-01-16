@@ -25,7 +25,7 @@
 	emp.setHIREDATE(date);
 
 	/* emp 객체를 가지고 Oracle에 INSERT한다 */
-	EmpDAO eDAO = EmpDAO.getInstance();
+	EmpDAO eDAO = new EmpDAO();
 	eDAO.insert(emp);
 %>
 </body>

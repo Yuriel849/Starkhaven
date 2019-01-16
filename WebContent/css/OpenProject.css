@@ -29,3 +29,11 @@ img.avatar {display: block; width: 300px; height: 300px; border-radius: 50%; mar
 .myPage_wrap {width: 50%; margin: 20px auto;}
 .myPage_wrap ul {list-style: none; margin: 20px auto; margin-top: 50px; margin-left: 50px;}
 .myPage_wrap span {display: inline-block; height: 40px; width: 200px; margin: 10px auto; margin-left: 50px; font-size: 20px; font-weight: 900;}
+
+/* empList.jsp's CSS */
+.section>.empH1 {width: 100%; margin: 20px auto; margin-top: 50px; padding: 30px; font-size: 30px;}
+table {margin-top: 10px; width: 100%; border-radius: 50px;}
+table, tr, td {border: 2px solid dimgray; border-collapse: collapse; text-align: center;}
+thead {background-color: lightslategray; color: whitesmoke; font-size: 20px;}
+thead>tr>td {padding: 10px 0px;}
+        

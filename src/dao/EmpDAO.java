@@ -2,21 +2,15 @@ package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import connector.ConnectionManagerOracle;
 import dto.Employee;
 
 public class EmpDAO extends ConnectionManagerOracle {
-	// Singleton pattern
-	private static EmpDAO eDAO = new EmpDAO();
-	private EmpDAO() {}
-	
-	// 외부에서 생성자에 직접 접근 못하니까 getInstance()로 대신 객체를 반환받도록.
-	public static EmpDAO getInstance() {
-		if(eDAO == null) { // Singleton 패턴 -> EmpDAO 객체가 단 하나만 만들어질 수 있도록 제어
-			eDAO = new EmpDAO();
-		}
-		return eDAO;
+	public EmpDAO() {
+		super();
 	}
 	
 	// Execute "SELECT WHERE EMPNO = ?" query
@@ -27,7 +21,7 @@ public class EmpDAO extends ConnectionManagerOracle {
 		try {
 			String query = "SELECt * FROM EMP WHERE EMPNO = ?";
 			
-			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
 			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
 
@@ -48,12 +42,40 @@ public class EmpDAO extends ConnectionManagerOracle {
 		return wrap;
 	} // selectByEmpNo() 끝.
 	
+	// Execute "SELECT *" query
+	public List<Employee> selectAllEmp() {
+		ResultSet rs = null;
+    	String query = "SELECT * FROM EMP";
+    	
+    	try {
+    		PreparedStatement pstmt = this.conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+    		
+    		List<Employee> list = new ArrayList<>();
+    		while (rs.next()) {
+    			int empno = rs.getInt(1);
+    			String ename = rs.getString(2);
+    			String job = rs.getString(3);
+    			int mgr = rs.getInt(4);
+    			String hiredate = rs.getString(5);
+    			double sal = rs.getDouble(6);
+    			double comm = rs.getDouble(6);
+    			int deptno = rs.getInt(6);
+    			list.add(new Employee(empno, ename, job, mgr, hiredate, sal, comm, deptno));
+    		}
+    		return list;
+    	} catch(Exception e) {
+    		e.printStackTrace();
+       	}
+		return null;
+    } // selectAllEmp() 끝.
+	
 	// Execute "INSERT" query
 	public int insert(Employee emp) {
 		try {
 			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'dd-mm-yyyy'), ?, ?, ?)";
 
-			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
 			pstmt.setInt(1, emp.getEMPNO());
 			pstmt.setString(2, emp.getENAME());
 			pstmt.setString(3, emp.getJOB());
@@ -75,7 +97,7 @@ public class EmpDAO extends ConnectionManagerOracle {
 		try {
 			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'dd-mm-yyyy'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
 					
-			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
 			pstmt.setString(1, emp.getENAME());
 			pstmt.setString(2, emp.getJOB());
 			pstmt.setInt(3, emp.getMGR());
@@ -97,7 +119,7 @@ public class EmpDAO extends ConnectionManagerOracle {
 		try {
 			String query = "DELETE FROM EMP WHERE EMPNO = ?";
 			
-			PreparedStatement pstmt = eDAO.conn.prepareStatement(query);
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
 			pstmt.setString(1, empno);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
