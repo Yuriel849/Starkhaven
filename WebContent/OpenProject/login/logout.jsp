@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Logout</title>
+<title>Starkhaven</title>
 </head>
 <body>
 <%

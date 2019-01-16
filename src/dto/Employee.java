@@ -1,77 +1,77 @@
 package dto;
 
 public class Employee {
-	private int EMPNO;
-	private String ENAME;
-	private String JOB;
-	private int MGR;
-	private String HIREDATE;
-	private double SAL;
-	private double COMM;
-	private int DEPTNO;
+	private int empno;
+	private String ename;
+	private String job;
+	private int mgr;
+	private String hiredate;
+	private double sal;
+	private double comm;
+	private int deptno;
 	
 	// DTO Default Constructor
 	public Employee() {}
 	
 	// DTO Constructor
-	public Employee(int empno, String ename, String job, int mgr, String hireDate, double sal, double comm, int deptno) {
-		this.EMPNO = empno;
-		this.ENAME = ename;
-		this.JOB = job;
-		this.MGR = mgr;
-		this.HIREDATE = hireDate;
-		this.SAL = sal;
-		this.COMM = comm;
-		this.DEPTNO = deptno;
+	public Employee(int empno, String ename, String job, int mgr, String hiredate, double sal, double comm, int deptno) {
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate = hiredate;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
 	}
 	
 	// DTO Getters & Setters
-	public int getEMPNO() {
-		return this.EMPNO;
+	public int getEmpno() {
+		return this.empno;
 	}
-	public void setEMPNO(int empno) {
-		this.EMPNO = empno;
+	public void setEmpno(int empno) {
+		this.empno = empno;
 	}
-	public String getENAME() {
-		return this.ENAME;
+	public String getEname() {
+		return this.ename;
 	}
-	public void setENAME(String ename) {
-		this.ENAME = ename;
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
-	public String getJOB() {
-		return this.JOB;
+	public String getJob() {
+		return this.job;
 	}
-	public void setJOB(String job) {
-		this.JOB = job;
+	public void setJob(String job) {
+		this.job = job;
 	}
-	public int getMGR() {
-		return this.MGR;
+	public int getMgr() {
+		return this.mgr;
 	}
-	public void setMGR(int mgr) {
-		this.MGR = mgr;
+	public void setMgr(int mgr) {
+		this.mgr = mgr;
 	}
-	public String getHIREDATE() {
-		return this.HIREDATE;
+	public String getHiredate() {
+		return this.hiredate;
 	}
-	public void setHIREDATE(String hiredate) {
-		this.HIREDATE = hiredate;
+	public void setHiredate(String hiredate) {
+		this.hiredate = hiredate;
 	}
-	public double getSAL() {
-		return this.SAL;
+	public double getSal() {
+		return this.sal;
 	}
-	public void setSAL(double sal) {
-		this.SAL = sal;
+	public void setSal(double sal) {
+		this.sal = sal;
 	}
-	public double getCOMM() {
-		return this.COMM;
+	public double getComm() {
+		return this.comm;
 	}
-	public void setCOMM(double comm) {
-		this.COMM = comm;
+	public void setComm(double comm) {
+		this.comm = comm;
 	}
-	public int getDEPTNO() {
-		return this.DEPTNO;
+	public int getDeptno() {
+		return this.deptno;
 	}
-	public void setDEPTNO(int deptno) {
-		this.DEPTNO = deptno;
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
 	}
 } // Employee 클래스 끝.

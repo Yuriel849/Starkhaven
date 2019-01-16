@@ -26,11 +26,11 @@
 				<h1>회원가입</h1>
 				<hr>
 				<div class="form_wrap">
-        			<form action="<%=request.getContextPath() %>/joinHandler" method="post">
+        			<form action="<%=request.getContextPath() %>/JoinHandler" method="post">
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="ID" maxlength="20" required>
+                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="ID" maxlength="50" required>
                 			</li>
                 			<li>
                     			<label for="PW">비밀번호</label>
@@ -38,7 +38,7 @@
                 			</li>
                 			<li>
                     			<label for="Name">이름</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;name" id="Name" name="Name" maxlength="20" required>
+                    			<input type="text" placeholder="&nbsp;&nbsp;name" id="Name" name="Name" maxlength="30" required>
                 			</li>
                 			<li>
                     			<label for="Img">사진</label>

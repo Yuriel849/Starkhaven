@@ -24,6 +24,7 @@
             <li>
                 <label for="mgr">메니저 : </label>
                 <select name="MGR" id="mgr" required>
+                    <option value="0">NONE</option>
                     <option value="7839">KING</option>
                     <option value="7698">BLAKE</option>
                     <option value="7782">CLARK</option>
@@ -57,6 +58,6 @@
                 <input type="submit" value="전송">
             </li>
         </ul>
-    </form>	
+    </form>
 </body>
 </html>

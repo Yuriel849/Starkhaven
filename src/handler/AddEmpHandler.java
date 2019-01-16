@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
-import dto.User;
+import dao.EmpDAO;
+import dto.Employee;
 
 /**
- * Servlet implementation class LoginHandler
+ * Servlet implementation class JoinHandler
  */
-@WebServlet("/LoginHandler")
-public class LoginHandler extends HttpServlet {
+@WebServlet("/AddEmpHandler")
+public class AddEmpHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginHandler() {}
+    public AddEmpHandler() {}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,30 +35,31 @@ public class LoginHandler extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		if(session.getAttribute("userID") != null) { // session 속에 userID 속성이 있다면 이미 로그인된 상태 -> 회원가입 불가
-			String message = "이미 로그인된 상태입니다.";
-			request.setAttribute("message", message);
-			reqDis = request.getRequestDispatcher("/OpenProject/main/index.jsp");
-		} else {
-			User user = new User();
-			UserDAO uDao = new UserDAO();
-			
-			String inID = request.getParameter("ID");
-			String inPW = request.getParameter("PW");
-			user.setId(inID);
-			user.setPw(inPW);
-			
-			User result = uDao.selectByID(user.getId());
+			Employee emp = new Employee();
+			EmpDAO eDao = new EmpDAO();
 
-			if(inID.equals(result.getId()) && inPW.equals(result.getPw())) { // DB에 INSERT 성공한 경우 -> 회원가입 성공, 이제 로그인으로
-				session.setAttribute("userID", inID);
+			emp.setEmpno((int) Integer.parseInt(request.getParameter("empno")));
+			emp.setEname(request.getParameter("ename"));
+			emp.setJob(request.getParameter("job"));
+			emp.setMgr((int) Integer.parseInt(request.getParameter("mgr")));
+			emp.setHiredate(request.getParameter("hiredate"));
+			emp.setSal((double) Double.parseDouble(request.getParameter("sal")));
+			emp.setComm((double) Double.parseDouble(request.getParameter("comm")));
+			emp.setDeptno((int) Integer.parseInt(request.getParameter("deptno")));
+			File img = null;
+						
+			int result = eDao.insert(emp);
+			System.out.println(result);
+			
+			if(result != -1 && result != 0) { // DB에 INSERT 성공한 경우 -> 회원가입 성공, 이제 로그인으로
+				String message = "사원등록에 성공했습니다!";
+				request.setAttribute("message", message);
 				reqDis = request.getRequestDispatcher("/OpenProject/main/index.jsp");
 			} else { // DB에 INSERT 실패한 경우 -> 다시 회원가입 양식으로
-				String message = "로그인에 실패했습니다.";
+				String message = "사원등록에 실패했습니다.";
 				request.setAttribute("message", message);
-				reqDis = request.getRequestDispatcher("/OpenProject/login/loginForm.jsp");
+				reqDis = request.getRequestDispatcher("/OpenProject/emp/empList.jsp");
 			}
-		}
 		
 		reqDis.forward(request, response);
 	}

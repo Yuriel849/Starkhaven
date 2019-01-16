@@ -25,11 +25,11 @@
 				<h1>회원 로그인</h1>
 				<hr>
 				<div class="form_wrap">
-        			<form action="<%=request.getContextPath() %>/loginHandler" method="post">
+        			<form action="<%=request.getContextPath() %>/LoginHandler" method="post">
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="ID" maxlength="20">
+                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="ID" maxlength="50">
                 			</li>
                 			<li>
                     			<label for="PW">비밀번호</label>

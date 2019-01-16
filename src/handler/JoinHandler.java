@@ -17,7 +17,7 @@ import dto.User;
 /**
  * Servlet implementation class JoinHandler
  */
-@WebServlet("/joinHandler")
+@WebServlet("/JoinHandler")
 public class JoinHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,6 +33,8 @@ public class JoinHandler extends HttpServlet {
 		HttpSession session = request.getSession();
 		RequestDispatcher reqDis = null;
 		
+		request.setCharacterEncoding("utf-8");
+		
 		if(session.getAttribute("userID") != null) { // session 속에 userID 속성이 있다면 이미 로그인된 상태 -> 회원가입 불가
 			String message = "이미 로그인된 상태입니다.";
 			request.setAttribute("message", message);
@@ -41,8 +43,8 @@ public class JoinHandler extends HttpServlet {
 			User user = new User();
 			UserDAO uDao = new UserDAO();
 			
-			user.setID(request.getParameter("ID"));
-			user.setPW(request.getParameter("PW"));
+			user.setId(request.getParameter("ID"));
+			user.setPw(request.getParameter("PW"));
 			user.setName(request.getParameter("Name"));
 			File img = null;
 			

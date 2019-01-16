@@ -36,4 +36,17 @@ table {margin-top: 10px; width: 100%; border-radius: 50px;}
 table, tr, td {border: 2px solid dimgray; border-collapse: collapse; text-align: center;}
 thead {background-color: lightslategray; color: whitesmoke; font-size: 20px;}
 thead>tr>td {padding: 10px 0px;}
-        
+
+/* addEmployee.jsp's CSS */
+select {display: inline-block; height: 40px; width: 300px; margin: 10px auto; font-size: 20px; font-weight: 500;}
+
+/* modal's CSS */
+.modal-format>span {display: block;}
+.modal-format>span>label {display: inline-block; width: 120px; color: darkslategrey; font-weight: bolder; font-family: '굴림', '돋움', consolas;}
+.modal-format>span>input {width: 230px; height: 30px; border: 1px solid gray; margin-bottom: 5px;}
+.modal-submit {display: block; margin: 0px auto; border: 2px solid gray !important; background-color: black; color: aliceblue; font-size: 18px; margin-top: 10px;}
+.modal {width: 100%; height: 100%; display: none; position: fixed; z-index: 1; padding-top: 100px; left: 0; top: 0; background-color: rgba(0,0,0,0.4);}
+.modal-content {background-color: #fefefe; margin: auto; padding: 50px; border: 1px solid #888; width: 25%; border-radius: 20px;}
+.close {color: #aaaaaa; float: right; font-size: 28px; font-weight: bold; margin-top: -50px;}
+.close:hover, .close:focus {color: #000; text-decoration: none;cursor: pointer;}
+

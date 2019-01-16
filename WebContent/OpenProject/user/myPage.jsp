@@ -15,7 +15,6 @@
 <body>	
 	<c:if test="${empty userID}">
     	<script>
-    		/* 속성 중 "message" 속성이 존재할 경우, 페이지 로딩 후 팝업창으로 보여준다. */
     		alert("로그인하셔야 합니다");
     		window.location.href = "<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp"
     	</script>
@@ -41,7 +40,7 @@
                 		</li>
                 		<li>
                     		<span>회원아이디</span>
-                    		<span class="Snd_span"><%=result.getID() %></span>
+                    		<span class="Snd_span"><%=result.getId() %></span>
 						</li>
                 		<li>
                     		<span>회원이름</span>

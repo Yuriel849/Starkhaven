@@ -24,6 +24,8 @@ public class EmpListHandler extends HttpServlet {
 
     public List<Employee> execute() {
 //		RequestDispatcher reqDis = null;
+    	
+//		request.setCharacterEncoding("utf-8");
 
     	EmpDAO eDao = new EmpDAO();
 						

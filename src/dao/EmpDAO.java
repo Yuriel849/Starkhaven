@@ -26,14 +26,14 @@ public class EmpDAO extends ConnectionManagerOracle {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				wrap.setEMPNO(rs.getInt(1));
-				wrap.setENAME(rs.getString(2));
-				wrap.setJOB(rs.getString(3));
-				wrap.setMGR(rs.getInt(4));
-				wrap.setHIREDATE(rs.getString(5));
-				wrap.setSAL(rs.getDouble(6));
-				wrap.setCOMM(rs.getDouble(7));
-				wrap.setDEPTNO(rs.getInt(8));
+				wrap.setEmpno(rs.getInt(1));
+				wrap.setEname(rs.getString(2));
+				wrap.setJob(rs.getString(3));
+				wrap.setMgr(rs.getInt(4));
+				wrap.setHiredate(rs.getString(5));
+				wrap.setSal(rs.getDouble(6));
+				wrap.setComm(rs.getDouble(7));
+				wrap.setDeptno(rs.getInt(8));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -73,17 +73,17 @@ public class EmpDAO extends ConnectionManagerOracle {
 	// Execute "INSERT" query
 	public int insert(Employee emp) {
 		try {
-			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'dd-mm-yyyy'), ?, ?, ?)";
+			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'yyyy-mm-dd'), ?, ?, ?)";
 
 			PreparedStatement pstmt = this.conn.prepareStatement(query);
-			pstmt.setInt(1, emp.getEMPNO());
-			pstmt.setString(2, emp.getENAME());
-			pstmt.setString(3, emp.getJOB());
-			pstmt.setInt(4, emp.getMGR());
-			pstmt.setString(5, emp.getHIREDATE());
-			pstmt.setDouble(6, emp.getSAL());
-			pstmt.setDouble(7, emp.getCOMM());
-			pstmt.setInt(8, emp.getDEPTNO());
+			pstmt.setInt(1, emp.getEmpno());
+			pstmt.setString(2, emp.getEname());
+			pstmt.setString(3, emp.getJob());
+			pstmt.setInt(4, emp.getMgr());
+			pstmt.setString(5, emp.getHiredate());
+			pstmt.setDouble(6, emp.getSal());
+			pstmt.setDouble(7, emp.getComm());
+			pstmt.setInt(8, emp.getDeptno());
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -95,17 +95,18 @@ public class EmpDAO extends ConnectionManagerOracle {
 	// Execute "UPDATE" query
 	public int update(Employee emp) {
 		try {
-			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'dd-mm-yyyy'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
-					
+			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'yyyy-mm-dd'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
+
 			PreparedStatement pstmt = this.conn.prepareStatement(query);
-			pstmt.setString(1, emp.getENAME());
-			pstmt.setString(2, emp.getJOB());
-			pstmt.setInt(3, emp.getMGR());
-			pstmt.setString(4, emp.getHIREDATE());
-			pstmt.setDouble(5, emp.getSAL());
-			pstmt.setDouble(6, emp.getCOMM());
-			pstmt.setInt(7, emp.getDEPTNO());
-			pstmt.setInt(8, emp.getEMPNO());
+			pstmt.setString(1, emp.getEname());
+			pstmt.setString(2, emp.getJob());
+			pstmt.setInt(3, emp.getMgr());
+			pstmt.setString(4, emp.getHiredate());
+			pstmt.setDouble(5, emp.getSal());
+			pstmt.setDouble(6, emp.getComm());
+			pstmt.setInt(7, emp.getDeptno());
+			pstmt.setInt(8, emp.getEmpno());
+			System.out.println(pstmt);
 			return pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -129,4 +130,3 @@ public class EmpDAO extends ConnectionManagerOracle {
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
 	} // delete() 끝.
 }
-

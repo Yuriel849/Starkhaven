@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends Dao {
-	
-	
-	
 	private static UserDAO udao = new UserDAO();
 
 	private UserDAO() {

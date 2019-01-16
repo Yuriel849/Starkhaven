@@ -16,13 +16,13 @@
 <body>
 <%
 	/* emp 객체의 HIREDATE 변수 값을 가져온다 (이것은 insertForm(EMP)에서 사용자가 선택한 날짜 값이다) */
-	String dateStr = emp.getHIREDATE();
+	String dateStr = emp.getHiredate();
 	/* dateStr에 담긴 날짜를 "-"를 기준으로 나눈다 */
 	String[] dateSplit = dateStr.split("-");
 	/* insertForm(EMP)에서 넘어온 날짜 형태를 Oracle에 INSERT하기 위한 날짜 형태로 바꾼다. */
 	String date = dateSplit[1] + "-" + dateSplit[2] + "-" + dateSplit[0];
 	/* emp 객체의 HIREDATE 변수 값을 바꾼다 */
-	emp.setHIREDATE(date);
+	emp.setHiredate(date);
 
 	/* emp 객체를 가지고 Oracle에 INSERT한다 */
 	EmpDAO eDAO = new EmpDAO();
