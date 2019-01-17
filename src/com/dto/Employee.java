@@ -1,4 +1,4 @@
-package dto;
+package com.dto;
 
 public class Employee {
 	private int empno;

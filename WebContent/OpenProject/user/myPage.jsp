@@ -1,5 +1,5 @@
-<%@page import="dto.User"%>
-<%@page import="dao.UserDAO"%>
+<%@page import="com.dto.User"%>
+<%@page import="com.dao.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,7 +23,7 @@
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	
 	<%
-		User result = new UserDAO().selectByID((String) session.getAttribute("userID"));
+		User result = UserDAO.getInstance().selectByID((String) session.getAttribute("userID"));
 		int cnt = 0;
 	%>
 	<div class="body_wrap">

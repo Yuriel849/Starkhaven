@@ -1,17 +1,12 @@
-<%@page import="dto.User"%>
+<%@page import="com.handler.UserListHandler"%>
+<%@page import="com.dto.User"%>
 <%@page import="java.util.List"%>
-<%@page import="handler.UserListHandler"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="current" class="java.util.Date" />
 <fmt:formatDate var="time" value="${current}" pattern="yyyy.MM.dd 'at' HH:mm:ss z" />
-
-<%
-	List<User> result = new UserListHandler().execute();
-	request.setAttribute("list", result);
-%>
 
 <!DOCTYPE html>
 <html>

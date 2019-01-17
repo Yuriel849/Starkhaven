@@ -1,27 +1,45 @@
-package dao;
+package com.dao;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import connector.ConnectionManagerOracle;
-import dto.Employee;
+import com.dto.Employee;
 
-public class EmpDAO extends ConnectionManagerOracle {
-	public EmpDAO() {
+import connector.ConnectionProvider;
+import connector.JDBCUtil;
+
+public class EmpDAO {
+	// Singleton 패턴 -> EmpDAO 객체가 단 하나만 만들어질 수 있도록 제어
+	private static EmpDAO eDao = new EmpDAO();
+	
+	private EmpDAO() {
 		super();
+	}
+	
+	// 외부에서 생성자에 직접 접근 못하니까 getInstance()로 대신 객체를 반환받도록.
+	public static EmpDAO getInstance() {
+		if(eDao == null) { eDao = new EmpDAO(); }
+		
+		return eDao;
 	}
 	
 	// Execute "SELECT WHERE EMPNO = ?" query
 	public Employee selectByEmpNo(String empno) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Employee wrap = new Employee();
 		
 		try {
 			String query = "SELECt * FROM EMP WHERE EMPNO = ?";
 			
-			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			conn = ConnectionProvider.getConnection();
+			
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
 
@@ -35,8 +53,12 @@ public class EmpDAO extends ConnectionManagerOracle {
 				wrap.setComm(rs.getDouble(7));
 				wrap.setDeptno(rs.getInt(8));
 			}
-		}catch(Exception e) {
-			e.printStackTrace();
+		} catch(Exception e) {
+		 	e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
 		}
 		
 		return wrap;
@@ -44,11 +66,16 @@ public class EmpDAO extends ConnectionManagerOracle {
 	
 	// Execute "SELECT *" query
 	public List<Employee> selectAllEmp() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-    	String query = "SELECT * FROM EMP";
     	
     	try {
-    		PreparedStatement pstmt = this.conn.prepareStatement(query);
+			String query = "SELECT * FROM EMP";
+
+			conn = ConnectionProvider.getConnection();
+    		
+    		pstmt = conn.prepareStatement(query);
     		rs = pstmt.executeQuery();
     		
     		List<Employee> list = new ArrayList<>();
@@ -66,16 +93,25 @@ public class EmpDAO extends ConnectionManagerOracle {
     		return list;
     	} catch(Exception e) {
     		e.printStackTrace();
-       	}
+       	} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
 		return null;
     } // selectAllEmp() 끝.
 	
 	// Execute "INSERT" query
 	public int insert(Employee emp) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		try {
 			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'yyyy-mm-dd'), ?, ?, ?)";
 
-			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			conn = ConnectionProvider.getConnection();
+
+			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, emp.getEmpno());
 			pstmt.setString(2, emp.getEname());
 			pstmt.setString(3, emp.getJob());
@@ -85,8 +121,11 @@ public class EmpDAO extends ConnectionManagerOracle {
 			pstmt.setDouble(7, emp.getComm());
 			pstmt.setInt(8, emp.getDeptno());
 			return pstmt.executeUpdate();
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
@@ -94,10 +133,15 @@ public class EmpDAO extends ConnectionManagerOracle {
 	
 	// Execute "UPDATE" query
 	public int update(Employee emp) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		try {
 			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'yyyy-mm-dd'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
 
-			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			conn = ConnectionProvider.getConnection();
+
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, emp.getEname());
 			pstmt.setString(2, emp.getJob());
 			pstmt.setInt(3, emp.getMgr());
@@ -108,8 +152,11 @@ public class EmpDAO extends ConnectionManagerOracle {
 			pstmt.setInt(8, emp.getEmpno());
 			System.out.println(pstmt);
 			return pstmt.executeUpdate();
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
@@ -117,14 +164,22 @@ public class EmpDAO extends ConnectionManagerOracle {
 	
 	// Execute "DELETE" query
 	public int delete(String empno) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
 		try {
 			String query = "DELETE FROM EMP WHERE EMPNO = ?";
+
+			conn = ConnectionProvider.getConnection();
 			
-			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, empno);
 			return pstmt.executeUpdate();
-		}catch(Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까

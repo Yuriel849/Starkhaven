@@ -1,17 +1,12 @@
-<%@page import="dto.Employee"%>
+<%@page import="com.handler.EmpListHandler"%>
+<%@page import="com.dto.Employee"%>
 <%@page import="java.util.List"%>
-<%@page import="handler.EmpListHandler"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="current" class="java.util.Date" />
 <fmt:formatDate var="time" value="${current}" pattern="yyyy.MM.dd 'at' HH:mm:ss z" />
-
-<%
-	List<Employee> result = new EmpListHandler().execute();
-	request.setAttribute("list", result);
-%>
 
 <!DOCTYPE html>
 <html>

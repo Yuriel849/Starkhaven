@@ -26,7 +26,7 @@
 				<h1>사원등록</h1>
 				<hr>
 				<div class="form_wrap">
-					<form action="<%=request.getContextPath() %>/AddEmpHandler" method="post">
+					<form action="<%=request.getContextPath() %>/AddEmpHandler.do" method="post">
         				<ul>
             				<li>
                 				<label for="empno">사원번호 : </label>

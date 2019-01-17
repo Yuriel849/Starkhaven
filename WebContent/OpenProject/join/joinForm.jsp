@@ -26,7 +26,7 @@
 				<h1>회원가입</h1>
 				<hr>
 				<div class="form_wrap">
-        			<form action="<%=request.getContextPath() %>/JoinHandler" method="post">
+        			<form action="<%=request.getContextPath() %>/JoinHandler.do" method="post">
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>

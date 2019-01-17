@@ -9,7 +9,7 @@ hr {border: 2px solid lightgray;}
 .top>a {display: block; width: 200px; margin: 0px auto; text-decoration: none; color: darkslategray; font-size: 30px; font-family: Times New Roman;}
 .menu {width: 80%; margin: 0px auto; text-align: center;}
 .menu>ul {display: block; list-style: none; margin-left: -6px;}
-.menu>ul>li {display: inline-block; border: 1px solid darkslateblue; margin-right: -6px; padding: 10px 0px;}
+.menu>ul>li {display: inline-block; margin-right: -6px; padding: 10px 0px;}
 .menu>ul>li>a {text-decoration: none; color: darkslategray; font-size: 20px; padding: 10px 38px;}
 
 /* joinForm.jsp's CSS */

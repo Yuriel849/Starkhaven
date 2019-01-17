@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 				<h1>회원 로그인</h1>
 				<hr>
 				<div class="form_wrap">
-        			<form action="<%=request.getContextPath() %>/LoginHandler" method="post">
+        			<form action="<%=request.getContextPath() %>/LoginHandler.do" method="post">
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>

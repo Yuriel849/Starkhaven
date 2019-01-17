@@ -1,11 +1,11 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="dao.EmpDAO"%>
+<%@page import="com.dao.EmpDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<jsp:useBean id="emp" class="dto.Employee" />
+<jsp:useBean id="emp" class="com.dto.Employee" />
 <jsp:setProperty name="emp" property="*" />
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
 	emp.setHiredate(date);
 
 	/* emp 객체를 가지고 Oracle에 INSERT한다 */
-	EmpDAO eDAO = new EmpDAO();
+	EmpDAO eDAO = EmpDAO.getInstance();
 	eDAO.insert(emp);
 %>
 </body>
