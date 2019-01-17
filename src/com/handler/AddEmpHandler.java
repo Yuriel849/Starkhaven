@@ -17,8 +17,7 @@ import com.dto.Employee;
 
 public class AddEmpHandler implements CommandHandler {
 	@Override
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {		
 		String returnStatement = null;
 		
 		request.setCharacterEncoding("utf-8");
