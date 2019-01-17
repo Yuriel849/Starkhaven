@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
-import dto.User;
+import com.dao.UserDAO;
+import com.dto.User;
 
 /**
  * Servlet implementation class EmpListHandler
  */
 @WebServlet("/UserListHandler")
-public class UserListHandler extends HttpServlet {
+public class DE_UserListHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
     public List<User> execute() {
@@ -27,7 +27,7 @@ public class UserListHandler extends HttpServlet {
     	
 //		request.setCharacterEncoding("utf-8");
 
-    	UserDAO uDao = new UserDAO();
+    	UserDAO uDao = UserDAO.getInstance();
 						
 		List<User> result = uDao.selectAllUsers();
 			

@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.EmpDAO;
-import dto.Employee;
+import com.dao.EmpDAO;
+import com.dto.Employee;
 
 /**
  * Servlet implementation class JoinHandler
  */
 @WebServlet("/AddEmpHandler")
-public class AddEmpHandler extends HttpServlet {
+public class DE_AddEmpHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddEmpHandler() {}
+    public DE_AddEmpHandler() {}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +36,7 @@ public class AddEmpHandler extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 			Employee emp = new Employee();
-			EmpDAO eDao = new EmpDAO();
+			EmpDAO eDao = EmpDAO.getInstance();
 
 			emp.setEmpno((int) Integer.parseInt(request.getParameter("empno")));
 			emp.setEname(request.getParameter("ename"));

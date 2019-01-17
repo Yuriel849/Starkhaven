@@ -1,11 +1,11 @@
 package exercises;
 
-import dao.EmpDAO;
-import dto.Employee;
+import com.dao.EmpDAO;
+import com.dto.Employee;
 
 class TestCRUD {
 	public static void main(String[] args) {
-		EmpDAO eDAO = new EmpDAO();
+		EmpDAO eDAO = EmpDAO.getInstance();
 
 		// Test "INSERT"
 		Employee testee = new Employee(1234, "TESTEE", "TEST", 5678, "1-1-2000", 500.0, 500.0, 10);

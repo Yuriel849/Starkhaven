@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.UserDAO;
-import dto.User;
+import com.dao.UserDAO;
+import com.dto.User;
 
 /**
  * Servlet implementation class JoinHandler
  */
 @WebServlet("/JoinHandler")
-public class JoinHandler extends HttpServlet {
+public class DE_JoinHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public JoinHandler() {}
+    public DE_JoinHandler() {}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,7 +41,7 @@ public class JoinHandler extends HttpServlet {
 			reqDis = request.getRequestDispatcher("/OpenProject/main/index.jsp");
 		} else {
 			User user = new User();
-			UserDAO uDao = new UserDAO();
+			UserDAO uDao = UserDAO.getInstance();
 			
 			user.setId(request.getParameter("ID"));
 			user.setPw(request.getParameter("PW"));
