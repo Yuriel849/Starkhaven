@@ -49,7 +49,7 @@
 							</tr>
             			</thead>
         				<tbody class="tableBody">
-        					<c:forEach var="item" items="${list}">
+        					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
         							<td>${item.id}</td>
@@ -63,13 +63,27 @@
     				</table>
 				</div>
 				<h5>Last Updated : ${time}</h5>
+				
+				<ul class="pageShift">
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=1">&lt;&lt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber-1}">&lt;</a></li>
+					<c:forEach var="i" begin="1" end="${result.pageTotalCount}">
+						<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${i}">${i}</a></li>
+					</c:forEach>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber+1}">&gt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.pageTotalCount}">&gt;&gt;</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
 	<script>
 		var cnt = 0;
-		$.each($('.idx').parent(), function(puppy, wolf) {
-			$('.idx:eq('+cnt+')').append(++cnt);
+		var lineNum = ${result.firstRow}
+    	var span = document.getElementsByClassName("close")[0];
+    	
+    	$.each($('.idx').parent(), function(puppy, wolf) {
+			console.log(cnt);
+			$('.idx:eq('+(cnt++)+')').append(lineNum++);
 		});
 	</script>
 </body>

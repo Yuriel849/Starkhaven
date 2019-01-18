@@ -22,10 +22,6 @@
 	
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	
-	<%
-		User result = UserDAO.getInstance().selectByID((String) session.getAttribute("userID"));
-		int cnt = 0;
-	%>
 	<div class="body_wrap">
     	<div class="body_main">
     		<div class="section">
@@ -35,16 +31,12 @@
 					<img class="avatar" alt="Firenze" src="<%=request.getContextPath()%>/Pictures/Firenze2018.JPG">
             		<ul>
                 		<li>
-                    		<span>회원번호</span>
-                    		<span class="Snd_span"><%=++cnt %></span>
-                		</li>
-                		<li>
                     		<span>회원아이디</span>
-                    		<span class="Snd_span"><%=result.getId() %></span>
+                    		<span class="Snd_span">${result.id}</span>
 						</li>
                 		<li>
                     		<span>회원이름</span>
-                    		<span class="Snd_span"><%=result.getName() %></span>
+                    		<span class="Snd_span">${result.name}</span>
                     	</li>
             		</ul>
 				</div>

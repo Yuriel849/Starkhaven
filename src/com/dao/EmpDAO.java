@@ -27,17 +27,14 @@ public class EmpDAO {
 	}
 	
 	// Execute "SELECT WHERE EMPNO = ?" query
-	public Employee selectByEmpNo(String empno) {
-		Connection conn = null;
+	public Employee selectByEmpNo(Connection conn, String empno) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Employee wrap = new Employee();
 		
 		try {
 			String query = "SELECt * FROM EMP WHERE EMPNO = ?";
-			
-			conn = ConnectionProvider.getConnection();
-			
+						
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, empno);
 			rs = pstmt.executeQuery();
@@ -57,22 +54,18 @@ public class EmpDAO {
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
 		
 		return wrap;
 	} // selectByEmpNo() 끝.
 	
 	// Execute "SELECT *" query
-	public List<Employee> selectAllEmp() {
-		Connection conn = null;
+	public List<Employee> selectAllEmp(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
     	
     	try {
 			String query = "SELECT * FROM EMP";
-
-			conn = ConnectionProvider.getConnection();
     		
     		pstmt = conn.prepareStatement(query);
     		rs = pstmt.executeQuery();
@@ -95,21 +88,17 @@ public class EmpDAO {
        	} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
 		return null;
     } // selectAllEmp() 끝.
 
 	// Execute "SELECT * WHERE ROWNUM, * BETWEEN A AND B" query
-	public List<Employee> selectEmp(int firstRow, int lastRow) {
-		Connection conn = null;
+	public List<Employee> selectEmp(Connection conn, int firstRow, int lastRow) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
     	
     	try {
-			String query = "SELECT * FROM (SELECT ROWNUM RN, S.* FROM (SELECT * FROM EMP) S) WHERE RN BETWEEN ? AND ?";
-
-			conn = ConnectionProvider.getConnection();
+			String query = "SELECT * FROM (SELECT ROWNUM RN, S.* FROM (SELECT * FROM EMP ORDER BY EMP.EMPNO ASC) S) WHERE RN BETWEEN ? AND ?";
     		
     		pstmt = conn.prepareStatement(query);
     		pstmt.setInt(1, firstRow);
@@ -134,22 +123,18 @@ public class EmpDAO {
        	} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
 		return null;
     } // selectEmp() 끝.
 	
 	// Execute "SELECT COUNT(*)" query
-	public int selectCount() {
-		Connection conn = null;
+	public int selectCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
     	
     	try {
 			String query = "SELECT COUNT(*) FROM EMP";
-
-			conn = ConnectionProvider.getConnection();
     		
     		pstmt = conn.prepareStatement(query);
     		rs = pstmt.executeQuery();
@@ -162,20 +147,16 @@ public class EmpDAO {
        	} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
     	return cnt;
     } // selectCount() 끝.
 	
 	// Execute "INSERT" query
-	public int insert(Employee emp) {
-		Connection conn = null;
+	public int insert(Connection conn, Employee emp) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String query = "INSERT INTO EMP VALUES(?, ?, ?, ?, to_date(?, 'yyyy-mm-dd'), ?, ?, ?)";
-
-			conn = ConnectionProvider.getConnection();
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, emp.getEmpno());
@@ -191,21 +172,17 @@ public class EmpDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
 	} // insert() 끝.
 	
 	// Execute "UPDATE" query
-	public int update(Employee emp) {
-		Connection conn = null;
+	public int update(Connection conn, Employee emp) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String query = "UPDATE EMP SET ENAME = ?, JOB = ?, MGR = ?, HIREDATE = to_date(?, 'yyyy-mm-dd'), SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
-
-			conn = ConnectionProvider.getConnection();
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, emp.getEname());
@@ -222,21 +199,17 @@ public class EmpDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
 	} // update() 끝.
 	
 	// Execute "DELETE" query
-	public int delete(String empno) {
-		Connection conn = null;
+	public int delete(Connection conn, String empno) {
 		PreparedStatement pstmt = null;
 
 		try {
 			String query = "DELETE FROM EMP WHERE EMPNO = ?";
-
-			conn = ConnectionProvider.getConnection();
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, empno);
@@ -245,7 +218,6 @@ public class EmpDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까

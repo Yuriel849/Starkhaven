@@ -17,12 +17,12 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<%-- 	<c:if test="${empty userID}">
+	<c:if test="${empty userID}">
     	<script>
     		alert("로그인하셔야 합니다");
     		window.location.href = "<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp"
     	</script>
-	</c:if> --%>
+	</c:if>
 
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	  	
@@ -76,11 +76,14 @@
 				</div>
 				<h5>Last Updated : ${time}</h5>
 				
-				<ul>
-					<% for(int i = 0; i < (int) request.getAttribute("pageCount"); i++) { %>
-						<li><a href="/starkhaven/EmpListHandler.do?countPerPage=5&pageNumber=1">[i+1]</a></li>	
-					<% } %>				
-				
+				<ul class="pageShift">
+					<li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=1">&lt;&lt;</a></li>
+					<li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber-1}">&lt;</a></li>
+					<c:forEach var="i" begin="1" end="${result.pageTotalCount}">
+						<li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=${i}">${i}</a></li>
+					</c:forEach>
+					<li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber+1}">&gt;</a></li>
+					<li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=${result.pageTotalCount}">&gt;&gt;</a></li>
 				</ul>
 				
 				<div id="modal" class="modal">
@@ -111,10 +114,12 @@
 	</div>
 	<script>
 		var cnt = 0;
+		var lineNum = ${result.firstRow}
         var span = document.getElementsByClassName("close")[0];
 		
 		$.each($('.idx').parent(), function(puppy, wolf) {
-			$('.idx:eq('+cnt+')').append(++cnt);
+			console.log(cnt);
+			$('.idx:eq('+(cnt++)+')').append(lineNum++);
 		});
 		
 		

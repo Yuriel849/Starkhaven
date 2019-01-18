@@ -13,9 +13,9 @@
                 	<li><a href="<%=request.getContextPath() %>/OpenProject/join/joinForm.jsp">회원가입</a></li>
                     <li><a href="<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp">로그인</a></li>
                     <li><a href="<%=request.getContextPath() %>/OpenProject/login/logout.jsp">로그아웃</a></li>
-                    <li><a href="<%=request.getContextPath() %>/OpenProject/user/myPage.jsp">마이페이지 (회원)</a></li>
-                    <li><a href="/starkhaven/UserListHandler.do">회원 리스트</a></li>
-                    <li><a href="/starkhaven/EmpListHandler.do?countPerPage=5&pageNumber=1">사원 리스트</a></li>
+                    <li><a href="/starkhaven/UserPageHandler.do">마이페이지 (회원)</a></li>
+                    <li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=1">회원 리스트</a></li>
+                    <li><a href="/starkhaven/EmpListHandler.do?countPerPage=3&pageNumber=1">사원 리스트</a></li>
                     <li><a href="<%=request.getContextPath() %>/OpenProject/emp/addEmployee.jsp">사원 등록</a></li>
             	</ul>
         	</div>

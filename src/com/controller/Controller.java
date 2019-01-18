@@ -9,7 +9,6 @@ import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,6 @@ import com.handler.*;
 /**
  * Servlet implementation class Controller
  */
-@WebServlet(urlPatterns = "/do")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -81,7 +79,6 @@ public class Controller extends HttpServlet {
 			handler = new NullHandler();
 		}
 		String viewPage = null;
-		System.out.println(handler);
 		try {
 			viewPage = handler.execute(request, response);
 		} catch(Throwable e) {

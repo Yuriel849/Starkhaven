@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +8,6 @@ import java.util.List;
 
 import com.dto.User;
 
-import connector.ConnectionProvider;
 import connector.JDBCUtil;
 
 public class UserDAO {
@@ -28,16 +26,13 @@ public class UserDAO {
 	}
 	
 	// Execute "SELECT WHERE ID = ?" query
-	public User selectByID(String ID) {
-		Connection conn = null;
+	public User selectByID(Connection conn, String ID) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User wrap = new User();
 		
 		try {
 			String query = "SELECT * FROM USERS WHERE ID = ?";
-
-			conn = ConnectionProvider.getConnection();
 			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, ID);
@@ -53,23 +48,19 @@ public class UserDAO {
 		} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
 		
 		return wrap;
 	} // selectByID() 끝.
 	
 	// Execute "SELECT *" query
-	public List<User> selectAllUsers() {
-		Connection conn = null;
+	public List<User> selectAllUsers(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 	   	try {
 	   		String query = "SELECT * FROM USERS";
 	   		
-			conn = ConnectionProvider.getConnection();
-
 	   		pstmt = conn.prepareStatement(query);
 	   		rs = pstmt.executeQuery();
 	   		
@@ -86,20 +77,70 @@ public class UserDAO {
 	   	} finally {
 			JDBCUtil.close(pstmt);
 			JDBCUtil.close(rs);
-			JDBCUtil.close(conn);
 		}
 		return null;
 	} // selectAllUsers() 끝.
 	
+	// Execute "SELECT * WHERE ROWNUM, * BETWEEN A AND B" query
+	public List<User> selectUser(Connection conn, int firstRow, int lastRow) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+    	
+    	try {
+			String query = "SELECT * FROM (SELECT ROWNUM RN, S.* FROM (SELECT * FROM USERS ORDER BY USERS.NAME ASC) S) WHERE RN BETWEEN ? AND ?";
+    		
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, firstRow);
+    		pstmt.setInt(2, lastRow);
+    		rs = pstmt.executeQuery();
+    		
+    		List<User> list = new ArrayList<>();
+    		while (rs.next()) {
+	   			String id = rs.getString(2);
+	   			String pw = rs.getString(3);
+	   			String name = rs.getString(4);
+	   			list.add(new User(id, pw, name));
+    		}
+    		return list;
+    	} catch(Exception e) {
+    		e.printStackTrace();
+       	} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+		return null;
+    } // selectEmp() 끝.
+	
+	// Execute "SELECT COUNT(*)" query
+	public int selectCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+    	
+    	try {
+			String query = "SELECT COUNT(*) FROM USERS";
+    		
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+
+    		while (rs.next()) {
+    			cnt = rs.getInt(1); // EMP 테이블에 레코드가 몇 개있는지 int 값을 저장한다.
+    		}
+    	} catch(Exception e) {
+    		e.printStackTrace();
+       	} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+		}
+    	return cnt;
+    } // selectCount() 끝.
+	
 	// Execute "INSERT" query
-	public int insertIntoUser(User user) {
-		Connection conn = null;
+	public int insertIntoUser(Connection conn, User user) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String query = "INSERT INTO USERS VALUES(?, ?, ?)";
-
-			conn = ConnectionProvider.getConnection();
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, user.getId());
@@ -110,21 +151,17 @@ public class UserDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
 	} // insert() 끝.
 	
 	// Execute "UPDATE" query
-	public int updateUser(User user) {
-		Connection conn = null;
+	public int updateUser(Connection conn, User user) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String query = "UPDATE USERS SET ID = ?, PW = ?, NAME = ?";
-
-			conn = ConnectionProvider.getConnection();
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, user.getId());
@@ -135,21 +172,17 @@ public class UserDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까
 	} // update() 끝.
 	
 	// Execute "DELETE" query
-	public int deleteFromUser(String ID) {
-		Connection conn = null;
+	public int deleteFromUser(Connection conn, String ID) {
 		PreparedStatement pstmt = null;
 		
 		try {
 			String query = "DELETE FROM USERS WHERE ID = ?";
-
-			conn = ConnectionProvider.getConnection();
 
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, ID);
@@ -158,7 +191,6 @@ public class UserDAO {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(pstmt);
-			JDBCUtil.close(conn);
 		}
 		
 		return -1; // 에러가 일어났다면 실행된다 -> 제대로 실행되지 않았다는 의미 -> executeUpdate()은 제대로 실행된 경우 1이나 0을 반환하니까

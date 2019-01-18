@@ -34,6 +34,7 @@ public class JDBCUtil {
 	public static void close(Connection conn) {
 		if(conn != null) {
 			try {
+				conn.setAutoCommit(true);
 				conn.close();
 			} catch(SQLException e) {}
 		}

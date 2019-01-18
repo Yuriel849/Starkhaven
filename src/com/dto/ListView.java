@@ -12,26 +12,14 @@ public class ListView {
 	private int firstRow;
 	private int lastRow;
 	
-	public ListView(List list, int messageTotalCount, int currentPageNumber, int messageCountPerPage, int firstRow, int lastRow) {
+	public ListView(List list, int messageTotalCount, int currentPageNumber, int messageCountPerPage, int pageTotalCount, int firstRow, int lastRow) {
 		this.list = list;
 		this.messageTotalCount = messageTotalCount;
 		this.currentPageNumber = currentPageNumber;
 		this.messageCountPerPage = messageCountPerPage;
 		this.firstRow = firstRow;
 		this.lastRow = lastRow;
-		calculatePageTotalCount();
-	}
-	
-	private void calculatePageTotalCount() {
-		if(messageTotalCount == 0) {
-			pageTotalCount = 0;
-		} else {
-			/* divides the number of messages by the number of messages per page,
-			 * 	   then calculates the remainder; if the remainder is greater than 0 (cannot be a negative number),
-			 *     then another page is required to show the remainder, so +1 to the total number of pages
-			 */
-			pageTotalCount = messageTotalCount / messageCountPerPage + (messageTotalCount % messageCountPerPage > 0 ? 1 : 0);
-		}
+		this.pageTotalCount = pageTotalCount;
 	}
 	
 	/* getters
