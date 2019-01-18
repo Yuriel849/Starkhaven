@@ -14,9 +14,7 @@
 
 #### [과제] Open Project >>
 ###### > src > connector > ConnectionManagerOracle.java
-###### > src > dto > User.java
-###### > src > dao > UserDAO.java
-###### > src > handler > JoinHandler.java (자바 파일로 DB와의 연동 및 정상 작동 테스트 목적)
+###### > src > com > *
 ###### > WebContent > OpenProject > *
 <br>
 
