@@ -1,7 +1,6 @@
 package com.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -100,6 +99,73 @@ public class EmpDAO {
 		}
 		return null;
     } // selectAllEmp() 끝.
+
+	// Execute "SELECT * WHERE ROWNUM, * BETWEEN A AND B" query
+	public List<Employee> selectEmp(int firstRow, int lastRow) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+    	
+    	try {
+			String query = "SELECT * FROM (SELECT ROWNUM RN, S.* FROM (SELECT * FROM EMP) S) WHERE RN BETWEEN ? AND ?";
+
+			conn = ConnectionProvider.getConnection();
+    		
+    		pstmt = conn.prepareStatement(query);
+    		pstmt.setInt(1, firstRow);
+    		pstmt.setInt(2, lastRow);
+    		rs = pstmt.executeQuery();
+    		
+    		List<Employee> list = new ArrayList<>();
+    		while (rs.next()) {
+    			int empno = rs.getInt(2);
+    			String ename = rs.getString(3);
+    			String job = rs.getString(4);
+    			int mgr = rs.getInt(5);
+    			String hiredate = rs.getString(6);
+    			double sal = rs.getDouble(7);
+    			double comm = rs.getDouble(8);
+    			int deptno = rs.getInt(9);
+    			list.add(new Employee(empno, ename, job, mgr, hiredate, sal, comm, deptno));
+    		}
+    		return list;
+    	} catch(Exception e) {
+    		e.printStackTrace();
+       	} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+		return null;
+    } // selectEmp() 끝.
+	
+	// Execute "SELECT COUNT(*)" query
+	public int selectCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int cnt = 0;
+    	
+    	try {
+			String query = "SELECT COUNT(*) FROM EMP";
+
+			conn = ConnectionProvider.getConnection();
+    		
+    		pstmt = conn.prepareStatement(query);
+    		rs = pstmt.executeQuery();
+
+    		while (rs.next()) {
+    			cnt = rs.getInt(1); // EMP 테이블에 레코드가 몇 개있는지 int 값을 저장한다.
+    		}
+    	} catch(Exception e) {
+    		e.printStackTrace();
+       	} finally {
+			JDBCUtil.close(pstmt);
+			JDBCUtil.close(rs);
+			JDBCUtil.close(conn);
+		}
+    	return cnt;
+    } // selectCount() 끝.
 	
 	// Execute "INSERT" query
 	public int insert(Employee emp) {

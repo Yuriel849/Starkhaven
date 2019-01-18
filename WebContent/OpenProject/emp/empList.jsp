@@ -17,12 +17,12 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-	<c:if test="${empty userID}">
+<%-- 	<c:if test="${empty userID}">
     	<script>
     		alert("로그인하셔야 합니다");
     		window.location.href = "<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp"
     	</script>
-	</c:if>
+	</c:if> --%>
 
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	  	
@@ -55,7 +55,7 @@
 							</tr>
             			</thead>
         				<tbody class="tableBody">
-        					<c:forEach var="item" items="${list}">
+        					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
         							<td>${item.empno}</td>
@@ -75,6 +75,13 @@
     				</table>
 				</div>
 				<h5>Last Updated : ${time}</h5>
+				
+				<ul>
+					<% for(int i = 0; i < (int) request.getAttribute("pageCount"); i++) { %>
+						<li><a href="/starkhaven/EmpListHandler.do?countPerPage=5&pageNumber=1">[i+1]</a></li>	
+					<% } %>				
+				
+				</ul>
 				
 				<div id="modal" class="modal">
                     <div class="modal-content">

@@ -1,6 +1,7 @@
 package com.dto;
 
 public class Employee {
+	private int rownum;
 	private int empno;
 	private String ename;
 	private String job;
@@ -12,7 +13,7 @@ public class Employee {
 	
 	// DTO Default Constructor
 	public Employee() {}
-	
+
 	// DTO Constructor
 	public Employee(int empno, String ename, String job, int mgr, String hiredate, double sal, double comm, int deptno) {
 		this.empno = empno;
@@ -20,12 +21,42 @@ public class Employee {
 		this.job = job;
 		this.mgr = mgr;
 		this.hiredate = hiredate;
+		System.out.println(this.hiredate);
+		cutTime();
 		this.sal = sal;
 		this.comm = comm;
 		this.deptno = deptno;
 	}
 	
+	// DTO Constructor
+	public Employee(int rownum, int empno, String ename, String job, int mgr, String hiredate, double sal, double comm, int deptno) {
+		this.rownum = rownum;
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate = hiredate;
+		System.out.println(this.hiredate);
+		cutTime();
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
+	}
+	
+	private void cutTime() {
+		int place = hiredate.indexOf(':');
+		if(place != -1) {
+			hiredate = hiredate.substring(0, place-2);
+		}
+	}
+	
 	// DTO Getters & Setters
+	public int getRownum() {
+		return this.rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public int getEmpno() {
 		return this.empno;
 	}
