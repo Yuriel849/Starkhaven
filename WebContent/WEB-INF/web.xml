@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>starkhaven</display-name>
+  <!-- "welcome-file-list" -> 특정 경로를 명시하지 않고 context root로 접근했을 때 접속할 페이지를 찾는 순서
+  	   -> 이것이 바로 index.html OR index.jsp를 메인페이지처럼 default page로 인식하는 이유!
+  	   -> Deployment Descriptor > Welcome Pages에서도 볼 수 있다 (Welcome Pages에서 안 보이면 제대로 등록되지 않았다는 뜻이다) -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -11,9 +14,35 @@
   </welcome-file-list>
   
   <servlet>
+    <description>Servlet to create the connection pool</description>
     <servlet-name>DBCPInit</servlet-name>
     <servlet-class>connector.DBCPInit</servlet-class>
-    <load-on-startup>1</load-on-startup>
+    <init-param>
+    	<description>JDBC Driver</description>
+    	<param-name>jdbcdriver</param-name>
+    	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+    </init-param>
+    <init-param>
+    	<description>JDBC URL</description>
+    	<param-name>jdbcUrl</param-name>
+    	<param-value>jdbc:oracle:thin:@localhost:1521:XE</param-value>
+    </init-param>
+    <init-param>
+    	<description>Oracle DB User Name</description>
+    	<param-name>dbUser</param-name>
+    	<param-value>Yuriel</param-value>
+    </init-param>
+    <init-param>
+    	<description>Oracle DB User Password</description>
+    	<param-name>dbPassword</param-name>
+    	<param-value>Sapph1r3</param-value>
+    </init-param>
+    <init-param>
+    	<description>Name of the connection pool</description>
+    	<param-name>poolName</param-name>
+    	<param-value>connections</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup> <!-- Tomcat 실행 시 해당 서블릿을 로딩하라는 명령 ("1"은 순서를 의미!) -->
   </servlet>
   
   <servlet>
@@ -23,7 +52,7 @@
 		<param-name>configFile</param-name>
 		<param-value>/WEB-INF/commandHandler.properties</param-value>
 	</init-param>
-	<load-on-startup>1</load-on-startup>
+	<load-on-startup>2</load-on-startup> <!-- "2"는 두번째로 로딩하라는 의미! -->
   </servlet>
   
   <servlet-mapping>
