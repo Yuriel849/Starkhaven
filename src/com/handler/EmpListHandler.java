@@ -24,9 +24,7 @@ public class EmpListHandler implements CommandHandler {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			
-			request.setCharacterEncoding("utf-8");
-			
+						
 			EmpDAO eDao = EmpDAO.getInstance();
 			List<Employee> list = null;
 			int firstRow = 0;

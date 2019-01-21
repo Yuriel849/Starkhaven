@@ -13,13 +13,6 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>	
-	<c:if test="${empty userID}">
-    	<script>
-    		alert("로그인하셔야 합니다");
-    		window.location.href = "<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp"
-    	</script>
-	</c:if>
-	
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	
 	<div class="body_wrap">

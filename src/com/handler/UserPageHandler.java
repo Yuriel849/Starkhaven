@@ -24,8 +24,6 @@ public class UserPageHandler implements CommandHandler {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
 			
-			request.setCharacterEncoding("utf-8");
-
 			User result = new User();
 			UserDAO uDao = UserDAO.getInstance();
 			String userID = (String) session.getAttribute("userID");

@@ -22,9 +22,7 @@ public class AddEmpHandler implements CommandHandler {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			
-			request.setCharacterEncoding("utf-8");
-			
+						
 			Employee emp = new Employee();
 			EmpDAO eDao = EmpDAO.getInstance();
 			

@@ -24,8 +24,6 @@ public class UserListHandler implements CommandHandler {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-
-			request.setCharacterEncoding("utf-8");
 			
 			UserDAO uDao = UserDAO.getInstance();
 			List<User> list = null;

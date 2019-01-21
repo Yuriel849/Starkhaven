@@ -23,9 +23,7 @@ public class LoginHandler implements CommandHandler {
 		try {
 			conn = ConnectionProvider.getConnection();
 			conn.setAutoCommit(false);
-			
-			request.setCharacterEncoding("utf-8");
-			
+						
 			if(session.getAttribute("userID") != null) { // session 속에 userID 속성이 있다면 이미 로그인된 상태 -> 회원가입 불가
 				String message = "이미 로그인된 상태입니다.";
 				request.setAttribute("message", message);
