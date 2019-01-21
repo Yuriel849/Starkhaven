@@ -14,6 +14,7 @@
 	String userPw = "";
 	String userImg = "";
 	
+	// 1. multipart/form-data 여부 확인
 	boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 	if(isMultipart) {
 		DiskFileItemFactory factory = new DiskFileItemFactory();

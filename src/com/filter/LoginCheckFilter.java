@@ -27,7 +27,9 @@ public class LoginCheckFilter implements Filter {
 		
 		if(session != null && session.getAttribute("userId") != null) {
 			login = true;
+			System.out.println("logged in");
 		} 
+		System.out.println("1 : login filter checking......");
 		if(login) {
 			chain.doFilter(request, response);
 		} else {
