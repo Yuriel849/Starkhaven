@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/OpenProject.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=917bd247b0791cf5d29c53a272e04d66"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=917bd247b0791cf5d29c53a272e04d66&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
