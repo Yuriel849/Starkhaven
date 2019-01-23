@@ -8,7 +8,7 @@
 	<meta charset="UTF-8">
 	<title>Starkhaven</title>
 	<!-- CSS 설정을 외부 파일로 분리 -->
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/OpenProject.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/map.css">
 	<!-- jQuery를 사용하기 위한 라이브러리 도입 -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
