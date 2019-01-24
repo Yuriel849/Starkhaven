@@ -27,7 +27,7 @@
 
 	<div class="body_wrap">
     	<div class="body_main">
-    		<div class="section">
+    		<div class="section" style="overflow:hidden; position: relative; ">
     			<div class="search-bar">
     				<div style="display: inline-block;">
     					<form onsubmit="searchPlaces(); return false;">
@@ -42,7 +42,7 @@
     			<div id="map"></div>
     			<div id="clickLatlng"></div>
     			
-    			<div class="sidebar">
+    			<div class="sidebar" style="position: absolute;">
         			<ul id="placesList"></ul>
         			<div id="pagination"></div>
     			</div>
@@ -50,37 +50,58 @@
 		</div>
 	</div>
 	
-<!-- 	    <div id="menu_wrap" class="bg_white">
-        <div class="option">
-            <div>
-                <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
-                </form>
-            </div>
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
-    </div> -->
-	
 	<script>
-	$('.sidebar').animate({'right':'100%'});
+		// 01. 지도 생성한다.
+		var container = $('#map')[0];
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new daum.maps.LatLng(37.5642135, 127.0016985), //지도의 중심좌표
+			level: 3 //지도의 레벨(확대, 축소 정도)
+		};
+		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+		// 02. geolocation 사용하여 접속 위치로 지도를 위치시킨다.
+		if (navigator.geolocation) { // HTML5의 geolocation 사용할 수 있는지 확인
+		    navigator.geolocation.getCurrentPosition(function(position) { // geolocation으로 현재 접속 위치 파악
+				var lat = position.coords.latitude, // latitude
+		        	lon = position.coords.longitude; // longitude
+		        var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 잡는다
+		            message = ""; // 인포윈도우에 표시될 내용
+		        displayMarker(locPosition, message); // 마커와 인포윈도우 표시
+			});
+		} else { // HTML5의 geolocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정한다		    
+		    var locPosition = new daum.maps.LatLng(37.5642135, 127.0016985),
+		        message = 'GEOLOCATION UNAVAILABLE';
+		    displayMarker(locPosition, message); // 마커와 인포윈도우 표시
+		}
+
+		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+		function displayMarker(locPosition, message) {
+		    if(message != "") { // message의 값이 빈 문자열이 아니라면 (즉, 내용이 있다면) 실행한다. 
+				// 마커 생성
+			    var marker = new daum.maps.Marker({  
+			        map: map, 
+			        position: locPosition
+			    });
+			    var iwContent = message, // 인포윈도우에 표시할 내용
+			        iwRemoveable = true;
+			    // 인포윈도우를 생성합니다
+			    var infowindow = new daum.maps.InfoWindow({
+			        content : iwContent,
+			        removable : iwRemoveable
+			    });	
+			    // 인포윈도우를 마커위에 표시합니다
+			    infowindow.open(map, marker);
+		    }
+		    // 지도 중심좌표를 접속위치로 변경합니다
+			map.setCenter(locPosition);
+		}
+
 	
 	
 	
 	// 마커를 담을 배열입니다
 	var markers = [];
-	
-		// 01. 지도 생성한다.
-		var container = document.getElementById('map');
-		var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new daum.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표
-			level: 3 //지도의 레벨(확대, 축소 정도)
-		};
-
-		var map = new daum.maps.Map(container, options); //지도 생성 및 객체 리턴
-		
+			
 		// 02. 지도 타입 컨트롤, 지도 줌 컨트롤 생성한다. 
 		var mapTypeControl = new daum.maps.MapTypeControl(); // 일반 지도와 스카이뷰 간 지도 타입을 전환할 수 있게 지도타입 컨트롤 생성
 
@@ -89,49 +110,7 @@
 
 		var zoomControl = new daum.maps.ZoomControl(); // 지도 확대/축소 제어용  줌 컨트롤 생성
 		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT); // 줌 컨트롤을 지도의 오른쪽에 위치시킴
-		
-		// 03. geolocation 사용하여 접속 위치로 지도를 위치시킨다.
-		if (navigator.geolocation) { // HTML5의 geolocation 사용할 수 있는지 확인
-		    navigator.geolocation.getCurrentPosition(function(position) { // geolocation으로 현재 접속 위치 파악
-				var lat = position.coords.latitude, // latitude
-		        	lon = position.coords.longitude; // longitude
-		        var locPosition = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 잡는다
-		            message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용
-		        
-		        // 마커와 인포윈도우 표시
-		        displayMarker(locPosition, message);
-			});
-		} else { // HTML5의 geolocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정한다		    
-		    var locPosition = new daum.maps.LatLng(33.450701, 126.570667),
-		        message = 'geolocation을 사용할수 없어요..'
-
-		    displayMarker(locPosition, message);
-		}
-
-		// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-		function displayMarker(locPosition, message) {
-		    // 마커 생성
-		    var marker = new daum.maps.Marker({  
-		        map: map, 
-		        position: locPosition
-		    }); 
-		    
-		    var iwContent = message, // 인포윈도우에 표시할 내용
-		        iwRemoveable = true;
-
-		    // 인포윈도우를 생성합니다
-		    var infowindow = new daum.maps.InfoWindow({
-		        content : iwContent,
-		        removable : iwRemoveable
-		    });
-
-		    // 인포윈도우를 마커위에 표시합니다
-		    infowindow.open(map, marker);
-
-		    // 지도 중심좌표를 접속위치로 변경합니다
-		    map.setCenter(locPosition);
-		}
-		
+				
 		// 04. 클릭한 위치에 마커 표시하기
 		// 지도를 클릭한 위치에 표출할 마커입니다
 		var marker = new daum.maps.Marker({
