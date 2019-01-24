@@ -14,14 +14,15 @@ hr {border: 2px solid lightgray;}
 .menu>ul>li>a {text-decoration: none; color: darkslategray; font-size: 20px; padding: 10px 38px; }
 .menu>ul>li>a:hover {text-shadow: 3px 3px 5px #1e90ff;}
 
-.section {width: 1532px; margin: 0px auto; background-color: #fefefe;}
+.section {position: relative; width: 1532px; margin: 0px auto; background-color: #fefefe; overflow:hidden; }
 .search-bar {width: 100%; margin: 0px auto; background-color: #ededed;}
 .search-bar>div {width: 420px; height: 30px;}
 #keyword {position: absolute; width: 300px; height: 30px; margin-top: -0px; font-weight: 800;}
 .search-bar>input, #keyword+input {width: 120px; height: 34px; float: right; font-weight: 800;}
 .search-bar>input:hover, #keyword+input:hover {border: none; background-color: #1e90ff; color: white;}
-#map {width: 100%; height: 600px;}
+#map {width: 100%; height: 600px; margin-left: 10px;}
 
-.sidebar {width: 110px; height: 100%; top: 182px; left: 0; background-color: #1e90ff; color: white;}
-.sidebar>ul>li>ul {list-style: disc;}
-.sidebar>ul>li>ul>li {background-color: red;}
+.sidebar_wrap {position: absolute; width: 10px; height: 100%; top: 34px; left: 0px; background-color: #ededed;}
+.sidebar {width: 0px; margin-right:10px; background-color: #1e90ff; color: white;}
+#placesList {}
+#placesList>li {list-style: disc;}
