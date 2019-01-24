@@ -12,7 +12,7 @@
 <!-- Includes jQuery library via CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- JavaScript API for the Kakao Map -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33a433a61100ce7b57f3c75f0c7fc83a&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=917bd247b0791cf5d29c53a272e04d66&libraries=services"></script>
 	
 </head>
 <body>
@@ -31,7 +31,13 @@
     			<div class="search-bar">
     				<div style="display: inline-block;">
     					<form onsubmit="searchPlaces(); return false;">
-                    		<input type="text" value="" id="keyword" placeholder="&nbsp;&nbsp;검색하고 싶은 키워드를 입력해주세요!" size="33"> 
+                    		<input type="text" value="" name="keyword" id="keyword" placeholder="&nbsp;&nbsp;검색하고 싶은 키워드를 입력해주세요!" size="33"> 
+                    		<input type="submit" name="search" id="search" value="검색하기"> 
+                		</form>
+    				</div>
+    				<div style="display: inline-block; margin-left: -6px;">
+                		<form onsubmit="return false;">
+                    		<input type="text" value="" name="blogKeyword" id="blogKeyword" placeholder="&nbsp;&nbsp;맛집 후기를 검색하세요!" size="33"> 
                     		<input type="submit" name="search" id="search" value="검색하기"> 
                 		</form>
     				</div>
@@ -219,10 +225,6 @@
 		        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 		        // LatLngBounds 객체에 좌표를 추가합니다
 		        bounds.extend(placePosition);
-				if(i == 0) {
-				    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-				    map.setBounds(bounds);
-				}
 		
 		        // 마커와 검색결과 항목에 mouseover 했을때
 		        // 해당 장소에 인포윈도우에 장소명을 표시합니다
@@ -251,6 +253,9 @@
 		    // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
 		    listEl.appendChild(fragment);
 		    //menuEl.scrollTop = 0;
+		    
+		    // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+		    map.setBounds(bounds);
 		}
 		
 		// 검색결과 항목을 Element로 반환하는 함수입니다

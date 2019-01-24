@@ -17,9 +17,9 @@ hr {border: 2px solid lightgray;}
 .section {position: relative; width: 1532px; margin: 0px auto; background-color: #fefefe; overflow:hidden; }
 .search-bar {width: 100%; margin: 0px auto; background-color: #ededed;}
 .search-bar>div {width: 420px; height: 30px;}
-#keyword {position: absolute; width: 300px; height: 30px; margin-top: -0px; font-weight: 800;}
-.search-bar>input, #keyword+input {width: 120px; height: 34px; float: right; font-weight: 800;}
-.search-bar>input:hover, #keyword+input:hover {border: none; background-color: #1e90ff; color: white;}
+#keyword, #blogKeyword {position: absolute; width: 300px; height: 30px; margin-top: -0px; font-weight: 800;}
+.search-bar>input, #keyword+input, #blogKeyword+input {width: 120px; height: 34px; float: right; font-weight: 800;}
+.search-bar>input:hover, #keyword+input:hover, #blogKeyword+input:hover {border: none; background-color: #1e90ff; color: white;}
 #map {width: 100%; height: 600px; margin-left: 10px;}
 
 .sidebar_wrap {position: absolute; width: 10px; height: 100%; top: 34px; left: 0px; background-color: #ededed;}
