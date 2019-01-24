@@ -23,4 +23,5 @@ hr {border: 2px solid lightgray;}
 #map {width: 100%; height: 600px;}
 
 .sidebar {width: 0px; height: 100%; position: fixed; top: 182px; left: 0; background-color: #1e90ff; color: white;}
-#placesList {}
+.sidebar>ul>li>ul {list-style: disc;}
+.sidebar>ul>li>ul>li {background-color: red;}
