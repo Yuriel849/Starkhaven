@@ -12,7 +12,7 @@
 <!-- Includes jQuery library via CDN -->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- JavaScript API for the Kakao Map -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=917bd247b0791cf5d29c53a272e04d66&libraries=services"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=33a433a61100ce7b57f3c75f0c7fc83a&libraries=services"></script>
 	
 </head>
 <body>
