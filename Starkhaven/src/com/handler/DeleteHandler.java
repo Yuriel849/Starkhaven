@@ -31,14 +31,16 @@ public class DeleteHandler implements CommandHandler {
 			conn.setAutoCommit(false);
 
 			UserDAO uDao = UserDAO.getInstance();
+			int result = uDao.deleteFromUser(conn, search);
+
 			List<User> list = null;
 			int firstRow = 0;
 			int lastRow = 0;
 			int countPerPage = Integer.parseInt(request.getParameter("countPerPage"));
 			int pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 			int totalCount = uDao.selectCount(conn);
-			int pageTotalCount = 0;
-
+			int pageTotalCount = 0;			
+			
 			if(totalCount == 0) {
 				pageTotalCount = 0;
 			} else {
@@ -46,23 +48,22 @@ public class DeleteHandler implements CommandHandler {
 			}
 			if(pageNumber <= 0) { pageNumber = 1; }
 			else if(pageNumber > pageTotalCount) { pageNumber = pageTotalCount; }
-			int currentPageNumber = pageNumber;
 			
 			if(countPerPage > 0) {
 				firstRow = (pageNumber - 1) * countPerPage + 1;
 				lastRow = firstRow + countPerPage - 1;
+				System.out.println(firstRow);
+				System.out.println(pageNumber);
 				list = uDao.selectUser(conn, firstRow, lastRow);
 			} else {
-				currentPageNumber = 0;
 				list = Collections.emptyList();
 			}
+
+			System.out.println(firstRow);
+			System.out.println(list);
+			request.setAttribute("information", list);
+			request.setAttribute("lineNum", firstRow);
 			
-			ListView listView = new ListView(list, totalCount, currentPageNumber, countPerPage, pageTotalCount, firstRow, lastRow);
-			System.out.println(listView.getList());
-			request.setAttribute("lView", listView.getList());
-	
-			int result = uDao.deleteFromUser(conn, search);
-				
 			if(result != -1) {
 				returnStatement = "/OpenProject/user/changeResults.jsp";
 			} else {

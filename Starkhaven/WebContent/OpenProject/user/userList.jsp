@@ -65,13 +65,13 @@
 				<h5>Last Updated : ${time}</h5>
 				
 				<ul class="pageShift">
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=1">&lt;&lt;</a></li>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber-1}">&lt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=1">&lt;&lt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.currentPageNumber-1}">&lt;</a></li>
 					<c:forEach var="i" begin="1" end="${result.pageTotalCount}">
-						<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${i}">${i}</a></li>
+						<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${i}">${i}</a></li>
 					</c:forEach>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.currentPageNumber+1}">&gt;</a></li>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=3&pageNumber=${result.pageTotalCount}">&gt;&gt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.currentPageNumber+1}">&gt;</a></li>
+					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.pageTotalCount}">&gt;&gt;</a></li>
 				</ul>
 			</div>
 		</div>
@@ -88,25 +88,26 @@
 		});
     	
     	$(".tableBody").on('click', '#delBtn', function() {
-    		console.log("mrow");
+        	console.log("pageNum : " + pageNum);
             if(confirm('삭제하시겠습니까?')) {
             	$.ajax({
             		url : '/starkhaven/DeleteHandler.do',
             		type : 'GET',
-            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 3, pageNumber : pageNum},
-            		dataType : 'json',
+            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
             		error : function() {
-            			alert("삭제하는데 에러가 발생했습니다.")
+            			alert("삭제하는데 에러가 발생했습니다.");
             		},
             		success : function(data) {
+            			alert("성공적으로 삭제했습니다.");
             			console.log("data : " + data);
-						$('.tableBody').empty();
-           				console.log("table emptied");
-           				$.each(data, function(i, val){
-        					var index=++i;
-	        				$('.tableBody').append('<tr><td class="idx"></td><td class="ident">' + val.id + '</td><td>' + val.name
-    	    					+ '</td><td><a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a></td></tr>')	
-        				});
+						$('.tableBody').empty().append(data);
+						cnt = 0;
+						lineNum = ${result.firstRow};
+           		    	$.each($('.idx').parent(), function(puppy, wolf) {
+           					console.log(cnt);
+           					$('.idx:eq('+(cnt++)+')').append(lineNum++);
+           				});
+
             		}
             	});
             }
