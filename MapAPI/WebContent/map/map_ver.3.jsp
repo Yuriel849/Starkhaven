@@ -420,7 +420,7 @@
            url: ForecastGribURL
           ,type: 'get'
           ,dataType: 'json'
-        ,async: false
+          ,async: false
           ,success: function(msg) {
               console.log(msg);
               
@@ -438,6 +438,7 @@
                 console.log(msg.response.body.items.item);
                 console.log("temp"+temp);
                 console.log("rain"+rain);
+                console.log("hum"+hum);  
           }
        })  
        return "기온: " + temp + " 강수확률: " + rain;
