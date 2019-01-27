@@ -52,10 +52,10 @@
         					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
-        							<td>${item.id}</td>
+        							<td class="ident">${item.id}</td>
          							<td>${item.name}</td>
     	    						<td>
-        								<a href="#" class="modify">수정</a>&nbsp;<a href="#" class="delete">삭제</a>
+        								<a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a>
         							</td>
         						</tr>
         					</c:forEach>
@@ -80,11 +80,37 @@
 		var cnt = 0;
 		var lineNum = ${result.firstRow}
     	var span = document.getElementsByClassName("close")[0];
+    	var pageNum = ${result.currentPageNumber};
     	
     	$.each($('.idx').parent(), function(puppy, wolf) {
 			console.log(cnt);
 			$('.idx:eq('+(cnt++)+')').append(lineNum++);
 		});
+    	
+    	$(".tableBody").on('click', '#delBtn', function() {
+    		console.log("mrow");
+            if(confirm('삭제하시겠습니까?')) {
+            	$.ajax({
+            		url : '/starkhaven/DeleteHandler.do',
+            		type : 'GET',
+            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 3, pageNumber : pageNum},
+            		dataType : 'json',
+            		error : function() {
+            			alert("삭제하는데 에러가 발생했습니다.")
+            		},
+            		success : function(data) {
+            			console.log("data : " + data);
+						$('.tableBody').empty();
+           				console.log("table emptied");
+           				$.each(data, function(i, val){
+        					var index=++i;
+	        				$('.tableBody').append('<tr><td class="idx"></td><td class="ident">' + val.id + '</td><td>' + val.name
+    	    					+ '</td><td><a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a></td></tr>')	
+        				});
+            		}
+            	});
+            }
+    	});
 	</script>
 </body>
 </html>

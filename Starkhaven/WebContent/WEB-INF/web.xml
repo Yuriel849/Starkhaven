@@ -66,10 +66,6 @@
   	<filter-name>LoginCheckFilter</filter-name>
   	<url-pattern>/OpenProject/user/*</url-pattern>
   </filter-mapping>
-  <filter-mapping>
-  	<filter-name>LoginCheckFilter</filter-name>
-  	<url-pattern>*.do</url-pattern>
-  </filter-mapping>
   
   <filter>
     <filter-name>CharEncodingFilter</filter-name>
