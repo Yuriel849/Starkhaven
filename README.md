@@ -13,9 +13,9 @@
 <br>
 
 #### [과제] Open Project >>
-###### > Starkhaven > src > connector > ConnectionManagerOracle.java
-###### > Starkhaven > src > com > *
-###### > Starkhaven > WebContent > OpenProject > *
+###### > OpenProject > src > connector > ConnectionManagerOracle.java
+###### > OpenProject > src > com > *
+###### > OpenProject > WebContent > OpenProject > *
 <br>
 
 #### [과제] ERD 모델링 실습 >>
