@@ -13,8 +13,17 @@ public class UserServiceImpl implements UserService {
 	private UserDAO dao;
 	
 	@Override
-	public void register(UserVO vo) throws Exception {
-		dao.create(vo);
+	public int register(UserVO vo) throws Exception {
+		return dao.create(vo);
 	}
 
+	@Override
+	public UserVO login(UserVO vo) throws Exception {
+		return dao.login(vo);
+	}
+	
+	@Override
+	public UserVO get(String id) throws Exception {
+		return dao.read(id);
+	}
 }
