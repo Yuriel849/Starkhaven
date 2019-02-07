@@ -21,9 +21,13 @@
 				<div class="myPage_wrap">
 					<img class="avatar" alt="Firenze" src="/resources/photos/Firenze2018.JPG">
             		<ul>
+						<li>
+                    		<span>회원번호</span>
+                    		<span class="Snd_span">${user.id}</span>
+						</li>
                 		<li>
                     		<span>회원아이디</span>
-                    		<span class="Snd_span">${user.id}</span>
+                    		<span class="Snd_span">${user.email}</span>
 						</li>
                 		<li>
                     		<span>회원이름</span>

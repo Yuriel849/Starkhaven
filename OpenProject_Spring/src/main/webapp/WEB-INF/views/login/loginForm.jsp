@@ -18,6 +18,7 @@
     		/* 속성 중 "message" 속성이 존재할 경우, 페이지 로딩 후 팝업창으로 보여준다. */
     		$(document).ready(function() { alert("${message}"); });
     	</script>
+		<c:remove var="message" scope="session"/>
 	</c:if>
 	
 	<div class="body_wrap">
@@ -30,11 +31,11 @@
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="id" maxlength="50">
+                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="email" name="email" maxlength="50">
                 			</li>
                 			<li>
                     			<label for="PW">비밀번호</label>
-                    			<input type="password" placeholder="&nbsp;&nbsp;password" id="PW" name="pw" maxlength="20">
+                    			<input type="password" placeholder="&nbsp;&nbsp;password" id="pw" name="pw" maxlength="20">
                 			</li>
                 			<li class="sub_li">
                     			<input type="submit" value="등록">

@@ -33,7 +33,7 @@ public class JoinController {
 		logger.info("******************** register post ********************");
 		logger.info(user.toString());
 		
-		int result = service.register(user);
+		int result = service.createUser(user);
 		
 		if(result > 0) {
 			model.addAttribute("message", "성공적으로 회원가입하셨습니다!");

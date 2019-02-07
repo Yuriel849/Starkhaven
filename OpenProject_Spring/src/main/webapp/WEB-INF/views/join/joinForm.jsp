@@ -30,15 +30,15 @@
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="ID" name="id" maxlength="50" required>
+                    			<input type="text" placeholder="&nbsp;&nbsp;ID (email address)" id="email" name="email" maxlength="50" required>
                 			</li>
                 			<li>
                     			<label for="PW">비밀번호</label>
-                    			<input type="password" placeholder="&nbsp;&nbsp;password" id="PW" name="pw" maxlength="20" required>
+                    			<input type="password" placeholder="&nbsp;&nbsp;password" id="pw" name="pw" maxlength="20" required>
                 			</li>
                 			<li>
                     			<label for="Name">이름</label>
-                    			<input type="text" placeholder="&nbsp;&nbsp;name" id="Name" name="name" maxlength="30" required>
+                    			<input type="text" placeholder="&nbsp;&nbsp;name" id="name" name="name" maxlength="30" required>
                 			</li>
                 			<li>
                     			<label for="Img">사진</label>
