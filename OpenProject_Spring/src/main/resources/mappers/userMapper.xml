@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.yuriel.persistence.UserDAO">
+<mapper namespace="com.yuriel.persistence.UserMapper">
 	<insert id="createUser">
 		insert into users (email, name, pw) values (#{email}, #{name}, #{pw})
 	</insert>
@@ -14,5 +14,13 @@
 	
 	<select id="selectOne" resultType="UserVO">
 		select * from users where email = #{email}
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) from users
+	</select>
+	
+	<select id="selectUsers" resultType="java.util.HashMap">
+		select * from (select * from users order by users.ID asc) as sub where ID limit #{frontRow}, #{countPerPage}
 	</select>
 </mapper>

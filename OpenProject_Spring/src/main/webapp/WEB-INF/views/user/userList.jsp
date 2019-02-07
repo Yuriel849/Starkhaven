@@ -11,17 +11,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Starkhaven</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/OpenProject.css">
+	<link rel="stylesheet" href="/resources/css/OpenProject.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<%-- 	<c:if test="${empty userID}">
-    	<script>
-    		alert("로그인하셔야 합니다");
-    		window.location.href = "<%=request.getContextPath() %>/OpenProject/login/loginForm.jsp"
-    	</script>
-	</c:if> --%>
-
 	<jsp:include page="../main/header.jsp" flush="false"></jsp:include>
 	  	
 	<c:if test="${not empty message}">
@@ -50,7 +43,7 @@
         					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
-        							<td class="ident">${item.id}</td>
+        							<td class="ident">${item.email}</td>
          							<td>${item.name}</td>
     	    						<td>
         								<a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a>
@@ -63,20 +56,20 @@
 				<h5>Last Updated : ${time}</h5>
 				
 				<ul class="pageShift">
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=1">&lt;&lt;</a></li>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.currentPageNumber-1}">&lt;</a></li>
+					<li><a href="/user/list/5/1">&lt;&lt;</a></li>
+					<li><a href="/user/list/5/${result.currentPageNumber-1}">&lt;</a></li>
 					<c:forEach var="i" begin="1" end="${result.pageTotalCount}">
-						<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${i}">${i}</a></li>
+						<li><a href="/user/list/5/${i}">${i}</a></li>
 					</c:forEach>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.currentPageNumber+1}">&gt;</a></li>
-					<li><a href="/starkhaven/UserListHandler.do?countPerPage=5&pageNumber=${result.pageTotalCount}">&gt;&gt;</a></li>
+					<li><a href="/user/list/5/${result.currentPageNumber+1}">&gt;</a></li>
+					<li><a href="/user/list/5/${result.pageTotalCount}">&gt;&gt;</a></li>
 				</ul>
 			</div>
 		</div>
 	</div>
 	<script>
 		var cnt = 0;
-		var lineNum = ${result.firstRow}
+		var lineNum = ${result.firstRow} + 1;
     	var span = document.getElementsByClassName("close")[0];
     	var pageNum = ${result.currentPageNumber};
     	

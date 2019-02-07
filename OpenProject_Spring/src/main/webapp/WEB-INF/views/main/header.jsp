@@ -12,13 +12,13 @@
         	<div class="menu">
             	<ul>
                     <li><a href="/user/myPage">마이페이지 (회원)</a></li>
-                    <li><a href="/user/list?countPerPage=5&pageNumber=1">회원 리스트</a></li>
+                    <li><a href="/user/list/5/1">회원 리스트</a></li>
                     <li><a href="/user/board?countPerPage=5&pageNumber=1">게시판</a></li>
                     <li><a href="/emp/list?countPerPage=5&pageNumber=1">사원 리스트</a></li>
                     <li><a href="/emp/addEmployee">사원 등록</a></li>
                     <c:choose>
                     	<c:when test="${signedIn != null}">
-		                    <li><a href="/login/logout">로그아웃</a></li>                    	
+		                    <li><a href="/login/logout" id="logout">로그아웃</a></li>                    	
                     	</c:when>
                     	<c:otherwise>
 		                	<li><a href="/join/joinForm">회원가입</a></li>
@@ -30,3 +30,11 @@
     	</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#logout").on('click', function() {
+			return confirm('로그아웃하시겠습니까?');
+		});
+	});
+</script>

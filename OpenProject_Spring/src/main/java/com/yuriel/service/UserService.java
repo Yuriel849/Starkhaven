@@ -1,5 +1,6 @@
 package com.yuriel.service;
 
+import com.yuriel.domain.UserListVO;
 import com.yuriel.domain.UserVO;
 
 public interface UserService {
@@ -8,4 +9,6 @@ public interface UserService {
 	public UserVO login(UserVO vo) throws Exception;
 	
 	public UserVO getUser(String email) throws Exception;
+	
+	public UserListVO getUserList(int count, int page) throws Exception;
 }
