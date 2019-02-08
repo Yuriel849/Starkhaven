@@ -25,6 +25,9 @@ public interface UserMapper {
 	// Mapper ID -> 메서드의 이름 -> selectUsers
 	public List<UserVO> selectUsers (@Param("frontRow") int frontRow, @Param("countPerPage") int countPerPage) throws Exception;
 	
+	// Mapper ID -> 메서드의 이름 -> addAttach
+	public int addAttach(String imgName) throws Exception;
+	
 	/* 
 	 * public void update(UserVO vo) throws Exception;
 	 * 

@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="login" resultType="UserVO">
-		select * from users where email = #{email} and pw = #{pw}
+		select * from users US left outer join users_attach CH on US.ID = CH.ID where email = #{email} and pw = #{pw}
 	</select>
 	
 	<select id="selectOne" resultType="UserVO">
@@ -23,4 +23,8 @@
 	<select id="selectUsers" resultType="java.util.HashMap">
 		select * from (select * from users order by users.ID asc) as sub where ID limit #{frontRow}, #{countPerPage}
 	</select>
+	
+	<insert id="addAttach">
+		insert into users_attach (fullName, ID) values (#{imgName}, LAST_INSERT_ID())
+	</insert>
 </mapper>

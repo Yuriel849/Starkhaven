@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yuriel.domain.UserVO;
-import com.yuriel.service.UserService;
+import com.yuriel.service.LoginService;
 
 @Controller
 @RequestMapping("/login/*")
@@ -20,7 +20,7 @@ public class LoginController {
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Inject
-	private UserService service;
+	private LoginService service;
 	
 	// GET -> 항상 사용자가 직접 브라우저에서 접근 가능한 경우 사용한다.
 	@RequestMapping(value ="/loginForm", method = RequestMethod.GET)
@@ -40,7 +40,7 @@ public class LoginController {
 		UserVO result = service.login(user);
 		
 		if(result != null) { // result != null이면 query 성공이라는 의미 -> email(id), pw 정확히 입력했다는 의미
-			session.setAttribute("signedIn", result);
+			session.setAttribute("user", result);
 			model.addAttribute("message", "성공적으로 로그인하셨습니다!");
 			return "main/index";
 		} else {
@@ -54,7 +54,7 @@ public class LoginController {
 		Object status = session.getAttribute("signedIn");
 		
 		if(status != null) {
-			session.removeAttribute("signedIn");
+			session.removeAttribute("user");
 			session.invalidate();
 			model.addAttribute("message", "로그아웃했습니다.");
 		} else {

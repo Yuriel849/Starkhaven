@@ -13,7 +13,7 @@ public class AuthCheckInterceptor extends HandlerInterceptorAdapter {
 		System.out.println("AuthCheckInterceptor called...............");
 		
 		if(session != null) { // 세션이 없을 경우를 대비한 null check
-			Object authInfo = session.getAttribute("signedIn");
+			Object authInfo = session.getAttribute("user");
 			if(authInfo != null) { // 로그인정보가 세션에 없을 경우를 대비한 null check
 				System.out.println("logged in status confirmed; proceeding...............");
 				return true; // 해당 interceptor 실행 종료 -> 다음 interceptor OR controller 호출하여 실행!

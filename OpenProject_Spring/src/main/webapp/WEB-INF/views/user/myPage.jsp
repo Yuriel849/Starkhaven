@@ -19,7 +19,7 @@
 				<h1>회원 마이페이지</h1>
 				<hr>
 				<div class="myPage_wrap">
-					<img class="avatar" alt="Firenze" src="/resources/photos/Firenze2018.JPG">
+					<img class="avatar" alt="no-img" src="${user.fullName}">
             		<ul>
 						<li>
                     		<span>회원번호</span>

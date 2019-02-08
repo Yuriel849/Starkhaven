@@ -1,10 +1,12 @@
 package com.yuriel.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.yuriel.domain.UserListVO;
 import com.yuriel.domain.UserVO;
 
 public interface UserService {
-	public int createUser(UserVO vo) throws Exception;
+	public int createUser(UserVO vo, HttpServletRequest request) throws Exception;
 	
 	public UserVO login(UserVO vo) throws Exception;
 	

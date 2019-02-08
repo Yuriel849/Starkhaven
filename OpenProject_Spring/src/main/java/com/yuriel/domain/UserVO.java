@@ -1,19 +1,21 @@
 package com.yuriel.domain;
 
-import java.io.File;
+import org.springframework.web.multipart.MultipartFile;
 
 public class UserVO {
 	private String id;
 	private String email;
 	private String name;
 	private String pw;
-	private File img = null; // 나중에 file upload 기능 추가
+	private String fullName;
+	private MultipartFile img = null;
 	
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", email=" + email + ", pw=" + pw + ", name=" + name + ", img=" + img + "]";
+		return "UserVO [id=" + id + ", email=" + email + ", name=" + name + ", pw=" + pw + ", fullName=" + fullName
+				+ ", img=" + img + "]";
 	}
-	
+
 	// getters & setters
 	public String getId() {
 		return id;
@@ -39,10 +41,16 @@ public class UserVO {
 	public void setPw(String pw) {
 		this.pw = pw;
 	}
-	public File getImg() {
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public MultipartFile getImg() {
 		return img;
 	}
-	public void setImg(File img) {
+	public void setImg(MultipartFile img) {
 		this.img = img;
 	}
 }

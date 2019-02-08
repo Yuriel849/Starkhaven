@@ -26,7 +26,7 @@
 				<h1>회원가입</h1>
 				<hr>
 				<div class="form_wrap">
-        			<form method="post">
+        			<form method="post" enctype="multipart/form-data">
             			<ul>
                 			<li>
                     			<label for="ID">아이디 (이메일)</label>
@@ -42,7 +42,7 @@
                 			</li>
                 			<li>
                     			<label for="Img">사진</label>
-                    			<input type="file" id="Img" name="Img" accept="image/">
+                    			<input type="file" id="img" name="img" accept="image/*">
                 			</li>
                 			<li class="sub_li">
                     			<input type="submit" value="등록">

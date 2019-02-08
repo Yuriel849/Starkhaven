@@ -17,7 +17,7 @@
                     <li><a href="/emp/list?countPerPage=5&pageNumber=1">사원 리스트</a></li>
                     <li><a href="/emp/addEmployee">사원 등록</a></li>
                     <c:choose>
-                    	<c:when test="${signedIn != null}">
+                    	<c:when test="${user != null}">
 		                    <li><a href="/login/logout" id="logout">로그아웃</a></li>                    	
                     	</c:when>
                     	<c:otherwise>
