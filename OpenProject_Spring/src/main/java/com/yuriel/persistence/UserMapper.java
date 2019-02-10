@@ -27,10 +27,10 @@ public interface UserMapper {
 	
 	// Mapper ID -> 메서드의 이름 -> addAttach
 	public int addAttach(String imgName) throws Exception;
+
+	// Mapper ID -> 메서드의 이름 -> deleteAttach
+	public void deleteAttach(@Param("ID") String ID) throws Exception;
 	
-	/* 
-	 * public void update(UserVO vo) throws Exception;
-	 * 
-	 * public void delete(Integer bno) throws Exception;
-	 */
+	// Mapper ID -> 메서드의 이름 -> deleteUser
+	public void deleteUser(@Param("ID") String ID) throws Exception;
 }

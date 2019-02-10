@@ -27,4 +27,12 @@
 	<insert id="addAttach">
 		insert into users_attach (fullName, ID) values (#{imgName}, LAST_INSERT_ID())
 	</insert>
+	
+	<delete id="deleteAttach">
+		delete from users_attach where ID = #{ID}
+	</delete>
+	
+	<delete id="deleteUser">
+		delete from users where ID = #{ID}
+	</delete>
 </mapper>

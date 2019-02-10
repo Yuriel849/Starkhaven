@@ -34,6 +34,7 @@
 						<thead>
             				<tr>
                 				<td>번호</td>
+                				<td>회원 번호</td>
                     			<td>회원 아이디 (이메일)</td>
                     			<td>회원 이름</td>
                     			<td>관리</td>
@@ -43,7 +44,8 @@
         					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
-        							<td class="ident">${item.email}</td>
+    	    						<td class="ident">${item.ID}</td>
+        							<td>${item.email}</td>
          							<td>${item.name}</td>
     	    						<td>
         								<a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a>
@@ -74,7 +76,8 @@
     	var pageNum = ${result.currentPageNumber};
     	
     	$.each($('.idx').parent(), function(puppy, wolf) {
-			console.log(cnt);
+			console.log("cnt " + cnt);
+			console.log("lineNum " + lineNum);
 			$('.idx:eq('+(cnt++)+')').append(lineNum++);
 		});
     	
@@ -82,7 +85,7 @@
         	console.log("pageNum : " + pageNum);
             if(confirm('삭제하시겠습니까?')) {
             	$.ajax({
-            		url : '/starkhaven/DeleteHandler.do',
+            		url : '/deleteUser',
             		type : 'GET',
             		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
             		error : function() {
@@ -93,7 +96,7 @@
             			console.log("data : " + data);
 						$('.tableBody').empty().append(data);
 						cnt = 0;
-						lineNum = ${result.firstRow};
+						lineNum = ${result.firstRow} + 1;
            		    	$.each($('.idx').parent(), function(puppy, wolf) {
            					console.log(cnt);
            					$('.idx:eq('+(cnt++)+')').append(lineNum++);

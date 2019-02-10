@@ -13,4 +13,6 @@ public interface UserService {
 	public UserVO getUser(String email) throws Exception;
 	
 	public UserListVO getUserList(int count, int page) throws Exception;
+	
+	public void deleteUser(String ID) throws Exception;
 }
