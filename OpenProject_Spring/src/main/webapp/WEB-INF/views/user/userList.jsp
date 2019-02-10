@@ -66,6 +66,31 @@
 					<li><a href="/user/list/5/${result.currentPageNumber+1}">&gt;</a></li>
 					<li><a href="/user/list/5/${result.pageTotalCount}">&gt;&gt;</a></li>
 				</ul>
+				
+				<!-- 회원 정보 수정용 modal -->
+				<div id="modal" class="modal">
+                    <div class="modal-content">
+                        <div class="reg">데이터 수정</div>
+                        <span class="close">&times;</span>
+                        <div class="modal-format">
+                            <span class="id">
+                                <label for="newID">아이디(이메일)</label>
+                                <input type="text" class="newID" name="modal-newID" id="modal-newID" maxlength="15">
+                            </span>
+                            <span class="pwd">
+                                <label for="newPwd">비밀번호</label>
+                                <input type="password" class="newPwd" name="modal-newPwd" id="modal-newPwd" maxlength="15">
+                            </span>
+                            <span class="name">
+                                <label for="newName">이름</label>
+                                <input type="text" class="newName" name="modal-newName" id="modal-newName" maxlength="15">
+                            </span>
+                            <span class="modal-btnSpan">
+                                <input type="button" class="modal-submit" name="modal-submit" id="modal-submit" value="수정">
+                            </span>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>
 	</div>
@@ -75,14 +100,64 @@
     	var span = document.getElementsByClassName("close")[0];
     	var pageNum = ${result.currentPageNumber};
     	
+    	// 회원 명단 번호 매기기
     	$.each($('.idx').parent(), function(puppy, wolf) {
 			console.log("cnt " + cnt);
 			console.log("lineNum " + lineNum);
 			$('.idx:eq('+(cnt++)+')').append(lineNum++);
 		});
+
+        /* modal의 "X" 표시를 누르면 modal을 닫는다 (안보이게 바꾼다) */
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        /* modal 밖의 영역을 누르면 modal을 닫는다 (안보이게 바꾼다) */
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     	
+        /* "수정" 버튼을 누르면 modal을 띄워서 사용자 입력을 기다린다. */
+        $('body').on('click', '.modify', function() {
+            /* "수정" 버튼을 누르면 modal이 나타난다 (안보이던게 보이게 된다) */
+            modal.style.display = "block";
+            document.getElementById('modal-newID').focus();
+            idx = $(this).parent().parent().index();
+        });
+            	
+    	// 회원 수정하기 기능
+    	$(".tableBody").on('click', '#modBtn', function() {
+            /* "수정" 버튼을 누르면 modal이 나타난다 (안보이던게 보이게 된다) */
+            modal.style.display = "block";
+            document.getElementById('modal-newID').focus();
+            idx = $(this).parent().parent().index();
+        	$("#modal-submit").on('click', function() {
+            	$.ajax({
+            		url : '/modifyUser',
+            		type : 'POST',
+            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
+            		error : function() {
+            			alert("삭제하는데 에러가 발생했습니다.");
+            		},
+            		success : function(data) {
+            			alert("성공적으로 삭제했습니다.");
+            			console.log("data : " + data);
+						$('.tableBody').empty().append(data);
+						cnt = 0;
+						lineNum = ${result.firstRow} + 1;
+           		    	$.each($('.idx').parent(), function(puppy, wolf) {
+           					console.log(cnt);
+           					$('.idx:eq('+(cnt++)+')').append(lineNum++);
+           				});
+            		}
+            	});
+        	}
+    	});
+    	
+    	// 회원 삭제하기 기능
     	$(".tableBody").on('click', '#delBtn', function() {
-        	console.log("pageNum : " + pageNum);
             if(confirm('삭제하시겠습니까?')) {
             	$.ajax({
             		url : '/deleteUser',
