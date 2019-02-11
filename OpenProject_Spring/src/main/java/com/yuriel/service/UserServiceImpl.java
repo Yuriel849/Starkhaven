@@ -55,12 +55,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public UserVO login(UserVO vo) throws Exception {
-		mapper = template.getMapper(UserMapper.class);
-		return mapper.login(vo);
-	}
-	
-	@Override
 	public UserVO getUser(String email) throws Exception {
 		mapper = template.getMapper(UserMapper.class);
 		return mapper.selectOne(email);
@@ -101,6 +95,15 @@ public class UserServiceImpl implements UserService {
 		
 		UserListVO result = new UserListVO(list, totalCount, currentPageNumber, countPerPage, pageTotalCount, firstRow);
 		return result;
+	}
+	
+	public List<UserVO> getAllUsersList() throws Exception {
+		mapper = template.getMapper(UserMapper.class);
+
+		// 모든 회원 정보를 가져온다.
+		List<UserVO> list = mapper.selectAllUsers();
+		
+		return list;
 	}
 
 	@Transactional

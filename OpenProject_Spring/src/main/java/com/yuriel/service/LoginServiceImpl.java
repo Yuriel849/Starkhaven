@@ -19,11 +19,7 @@ public class LoginServiceImpl implements LoginService {
 	
 	@Override
 	public UserVO login(UserVO vo) throws Exception {
-		String uploadPath = "../resources/photos/";
-
 		mapper = template.getMapper(UserMapper.class);
-		UserVO result = mapper.login(vo);
-		result.setFullName(uploadPath + result.getFullName());
-		return result;
-	}	
+		return mapper.login(vo);
+	}
 }

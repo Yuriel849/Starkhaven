@@ -4,6 +4,7 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -24,7 +25,11 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="contentType" value="UTF-8" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
+	
+	<!-- Custom view for downloading files -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1" />
 	
 	<!-- multipartResolver, to handle the data received when a file is uploaded to the server -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -32,15 +37,14 @@
 	</beans:bean>
 	
 	<!-- Set up interceptors -->
-	<interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/user/**" />
 			<beans:bean class="com.yuriel.interceptor.AuthCheckInterceptor" />
 		</interceptor>
-	</interceptors>
-	
-	<context:component-scan base-package="com.yuriel.controller" />
-	<context:component-scan base-package="com.yuriel.persistence" />
-	<context:component-scan base-package="com.yuriel.service" />
+	</interceptors> -->
+
+	<!-- Scans all packages under "com.yuriel" for beans (@Controller, @Service, @Component, etc.) -->	
+	<context:component-scan base-package="com.yuriel" />
 	
 </beans:beans>

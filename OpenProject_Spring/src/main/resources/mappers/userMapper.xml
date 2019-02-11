@@ -20,8 +20,12 @@
 		select count(*) from users
 	</select>
 	
-	<select id="selectUsers" resultType="java.util.HashMap">
+	<select id="selectUsers" resultType="UserVO">
 		select * from (select * from users order by users.ID asc) as sub where ID limit #{frontRow}, #{countPerPage}
+	</select>
+	
+	<select id="selectAllUsers" resultType="UserVO">
+		select * from (select * from users order by users.ID asc) as sub
 	</select>
 	
 	<insert id="addAttach">

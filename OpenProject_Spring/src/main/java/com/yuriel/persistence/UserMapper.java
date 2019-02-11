@@ -8,7 +8,7 @@ import com.yuriel.domain.UserVO;
 
 public interface UserMapper {
 	// namespace 설정 -> namespace는 인터페이스의 full name
-	String namespace = "com.yuriel.persistence.UserDAO";
+	String namespace = "com.yuriel.persistence.UserMapper";
 	
 	// Mapper ID -> 메서드의 이름 -> createUser
 	public int createUser(UserVO vo) throws Exception;
@@ -24,6 +24,9 @@ public interface UserMapper {
 	
 	// Mapper ID -> 메서드의 이름 -> selectUsers
 	public List<UserVO> selectUsers (@Param("frontRow") int frontRow, @Param("countPerPage") int countPerPage) throws Exception;
+
+	// Mapper ID -> 메서드의 이름 -> selectAllUsers
+	public List<UserVO> selectAllUsers () throws Exception;
 	
 	// Mapper ID -> 메서드의 이름 -> addAttach
 	public int addAttach(String imgName) throws Exception;

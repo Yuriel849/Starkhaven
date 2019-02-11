@@ -28,6 +28,10 @@
     	<div class="body_main">
     		<div class="section">
 				<h1 class="empH1">회원 리스트</h1>
+				<span>
+					<a href="/download/xlsx" class="download" id="downloadXlsx">EXCEL 다운로드</a>
+					<a href="/download/pdf" class="download" id="downloadPdf">PDF 다운로드</a>
+				</span>
 				<hr>
 				<div class="list">
 					<table>
@@ -44,7 +48,7 @@
         					<c:forEach var="item" items="${result.list}">
 	        					<tr>
     	    						<td class="idx"></td>
-    	    						<td class="ident">${item.ID}</td>
+    	    						<td class="ident">${item.id}</td>
         							<td>${item.email}</td>
          							<td>${item.name}</td>
     	    						<td>
@@ -73,9 +77,13 @@
                         <div class="reg">데이터 수정</div>
                         <span class="close">&times;</span>
                         <div class="modal-format">
+                        	<span class="id">
+                        		<label for="newID">회원번호</label>
+                        		<input type="text" class="newID" name="modal-ID" id="modal-ID" readonly>
+                        	</span>
                             <span class="id">
-                                <label for="newID">아이디(이메일)</label>
-                                <input type="text" class="newID" name="modal-newID" id="modal-newID" maxlength="15">
+                                <label for="newID">이메일</label>
+                                <input type="text" class="newID" name="modal-newEmail" id="modal-newEmail" maxlength="15">
                             </span>
                             <span class="pwd">
                                 <label for="newPwd">비밀번호</label>
@@ -153,7 +161,7 @@
            				});
             		}
             	});
-        	}
+        	});
     	});
     	
     	// 회원 삭제하기 기능
