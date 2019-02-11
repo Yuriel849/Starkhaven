@@ -113,4 +113,13 @@ public class UserServiceImpl implements UserService {
 		mapper.deleteAttach(ID);
 		mapper.deleteUser(ID);
 	}
+	
+	@Transactional
+	@Override
+	public int modifyUser(UserVO vo) throws Exception {
+		mapper = template.getMapper(UserMapper.class);
+		int result = mapper.modifyUser(vo);
+		
+		return result;
+	}
 }

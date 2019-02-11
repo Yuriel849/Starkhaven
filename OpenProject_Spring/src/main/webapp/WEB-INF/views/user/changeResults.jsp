@@ -4,7 +4,7 @@
 	<c:forEach var="item" items="${result.list}">
 		<tr>
     	    <td class="idx"></td>
-    	    <td class="ident">${item.ID}</td>
+    	    <td class="ident">${item.id}</td>
         	<td>${item.email}</td>
          	<td>${item.name}</td>
     		<td>

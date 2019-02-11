@@ -49,8 +49,8 @@
 	        					<tr>
     	    						<td class="idx"></td>
     	    						<td class="ident">${item.id}</td>
-        							<td>${item.email}</td>
-         							<td>${item.name}</td>
+        							<td class="iEmail">${item.email}</td>
+         							<td class="iName">${item.name}</td>
     	    						<td>
         								<a href="#" class="modify" id="modBtn">수정</a>&nbsp;<a href="#" class="delete" id="delBtn">삭제</a>
         							</td>
@@ -126,28 +126,32 @@
                 modal.style.display = "none";
             }
         }
-    	
-        /* "수정" 버튼을 누르면 modal을 띄워서 사용자 입력을 기다린다. */
-        $('body').on('click', '.modify', function() {
-            /* "수정" 버튼을 누르면 modal이 나타난다 (안보이던게 보이게 된다) */
-            modal.style.display = "block";
-            document.getElementById('modal-newID').focus();
-            idx = $(this).parent().parent().index();
-        });
-            	
+    	            	
     	// 회원 수정하기 기능
     	$(".tableBody").on('click', '#modBtn', function() {
             /* "수정" 버튼을 누르면 modal이 나타난다 (안보이던게 보이게 된다) */
             modal.style.display = "block";
-            document.getElementById('modal-newID').focus();
+            var userId = $(this).parent().siblings(".ident").text();
+            document.getElementById('modal-ID').value = userId;            
+            var userEm = $(this).parent().siblings(".iEmail").text();
+            document.getElementById('modal-newEmail').value = userEm;
+            var userNa = $(this).parent().siblings(".iName").text();
+            document.getElementById('modal-newName').value = userNa;
+            
+            document.getElementById('modal-ID').focus();
             idx = $(this).parent().parent().index();
         	$("#modal-submit").on('click', function() {
             	$.ajax({
             		url : '/modifyUser',
             		type : 'POST',
-            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
+            		data : {id : userId,
+            				email : $("#modal-newEmail").val(),
+            				pw : $("#modal-newPwd").val(),
+            				name : $("#modal-newName").val(),
+            				countPerPage : 5,
+            				pageNumber : pageNum},
             		error : function() {
-            			alert("삭제하는데 에러가 발생했습니다.");
+            			alert("회원정보를 수정하는데 실패했습니다. 다시 시도해주세요.");
             		},
             		success : function(data) {
             			alert("성공적으로 삭제했습니다.");
@@ -159,6 +163,7 @@
            					console.log(cnt);
            					$('.idx:eq('+(cnt++)+')').append(lineNum++);
            				});
+           	            modal.style.display = "none";
             		}
             	});
         	});
@@ -170,7 +175,7 @@
             	$.ajax({
             		url : '/deleteUser',
             		type : 'GET',
-            		data : {ID : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
+            		data : {id : $(this).parent().siblings('.ident').text(), countPerPage : 5, pageNumber : pageNum},
             		error : function() {
             			alert("삭제하는데 에러가 발생했습니다.");
             		},

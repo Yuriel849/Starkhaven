@@ -10,23 +10,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yuriel.domain.UserListVO;
+import com.yuriel.domain.UserVO;
 import com.yuriel.service.UserService;
 
 @Controller
-public class DeleteController {
-	private static final Logger logger = LoggerFactory.getLogger(DeleteController.class);
+public class ModifyController {
+	private static final Logger logger = LoggerFactory.getLogger(ModifyController.class);
 
 	@Inject
 	private UserService service;
 	
 	// GET -> 항상 사용자가 직접 브라우저에서 접근 가능한 경우 사용한다.
-	@RequestMapping(value ="/deleteUser", method = RequestMethod.GET)
-	public String deleteGET(String id, int countPerPage, int pageNumber, Model model) throws Exception {
-		logger.info("******************** delete user GET ********************");
+	@RequestMapping(value ="/modifyUser", method = RequestMethod.POST)
+	public String modifyPOST(UserVO user, int countPerPage, int pageNumber, Model model) throws Exception {
+		logger.info("******************** modify user POST ********************");
 		
-		System.out.println(id + ", " + countPerPage + ", " + pageNumber);
+		System.out.println(user + ", " + countPerPage + ", " + pageNumber);
 		
-		service.deleteUser(id);
+		int res = service.modifyUser(user);
+		
+		if(res != 1) {
+			model.addAttribute("message", "입력하는데 실패했습니다. 다시 시도해주세요.");
+		}
 		
 		UserListVO result = service.getUserList(countPerPage, pageNumber);
 		System.out.println("USERLISTVO IS..... " + result);

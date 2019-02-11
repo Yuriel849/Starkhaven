@@ -17,4 +17,6 @@ public interface UserService {
 	public List<UserVO> getAllUsersList() throws Exception;
 	
 	public void deleteUser(String ID) throws Exception;
+	
+	public int modifyUser(UserVO vo) throws Exception;
 }

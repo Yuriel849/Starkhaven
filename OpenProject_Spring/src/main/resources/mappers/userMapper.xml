@@ -39,4 +39,8 @@
 	<delete id="deleteUser">
 		delete from users where ID = #{ID}
 	</delete>
+	
+	<update id="modifyUser">
+		update users set email=#{email}, pw=#{pw}, name=#{name} where ID=#{id} 
+	</update>
 </mapper>
