@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yuriel.domain.UserVO;
+import com.yuriel.service.AuthService;
 import com.yuriel.service.UserService;
 
 @Controller
@@ -19,22 +21,26 @@ public class JoinController {
 	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 
 	@Inject
-	private UserService service;
+	private UserService userService;
 	
-	// GET -> 항상 사용자가 직접 브라우저에서 접근 가능한 경우 사용한다.
+	@Inject
+	private AuthService authService;
+	
 	@RequestMapping(value ="/joinForm", method = RequestMethod.GET)
 	public void registGET(UserVO user, Model model) throws Exception {
 		logger.info("******************** register get ********************");
 	}
 		
-	// POST -> 외부에서 많은 정보를 입력해야 하는 경우, 브라우저 주소창에 보여져서는 안 되는 정보를 전송할 때 사용한다.
 	@RequestMapping(value = "/joinForm", method = RequestMethod.POST)
-				  // 매개변수 -> 입력하는 데이터를 UserVO에서 수집하고, view까지 데이터를 보내야할 수도 있으니까 Model을 사용한다.
 	public String registPOST(UserVO user, HttpServletRequest request, Model model) throws Exception {
 		logger.info("******************** register post ********************");
-		logger.info(user.toString());
 		
-		int result = service.createUser(user, request);
+		// 저장될 경로를 계산한다.
+		String uploadPath = "/resources/photos/";
+		String dir = request.getSession().getServletContext().getRealPath(uploadPath);
+
+		// service에게 UserVO 객체, 고유번호 UUID, 경로 dir를 제공한다.
+		int result = userService.createUser(user, dir);
 		
 		if(result > 0) {
 			model.addAttribute("message", "성공적으로 회원가입하셨습니다!");
@@ -43,5 +49,20 @@ public class JoinController {
 			model.addAttribute("message", "회원가입에 실패했습니다. 다시 입력해주세요.");
 			return "join/joinForm";
 		}		
+	}
+	
+	@RequestMapping(value = "/auth/{email}/{code}", method = RequestMethod.GET)
+	public String joinAuth(@PathVariable("email") String email, @PathVariable("code") String code, Model model) throws Exception {
+		if(email != null && code != null) {
+			int result = authService.authenticate(email, code);
+			if(result == 1) {
+				authService.deleteAuthCode(email);
+				model.addAttribute("message", "본인 인증에 성공하셨습니다!");
+			} else {
+				model.addAttribute("message", "본인 인증에 실패했습니다. 관리자에게 문의 주십시요.");
+			}
+		}
+		
+		return "main/index";
 	}
 }

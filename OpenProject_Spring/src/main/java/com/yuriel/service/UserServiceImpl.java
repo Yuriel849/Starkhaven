@@ -4,10 +4,9 @@ import java.io.File;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
@@ -22,34 +21,59 @@ public class UserServiceImpl implements UserService {
 	@Inject
 	private SqlSessionTemplate template;
 	
+	@Inject
+	private MimeMailServiceImpl service;
+	
+	@Inject
+	private Sha256 sha256;
+	
+	@Inject
+	private Aes256 aes256;
+	
 	// 인터페이스 사용하기
 	private UserMapper mapper;
  // private UserMapper mapper = template.getMapper(UserMapper.class); -> IMPOSSIBLE! -> DI는 객체 생성 후 실행, 이것은 생성할 떄 실행
 	
 	@Transactional
 	@Override
-	public int createUser(UserVO vo, HttpServletRequest request) throws Exception {
-		// 같은 이름의 파일을 구분할 수 있도록 사용할 고유번호로 UUID를 얻는다
-		UUID uid = UUID.randomUUID();
-		
-		// 저장될 경로를 계산한다.
-		String uploadPath = "/resources/photos/";
-		String dir = request.getSession().getServletContext().getRealPath(uploadPath);
-		
+	public int createUser(UserVO vo, String dir) throws Exception {
+		// 같은 이름의 파일을 구분할 수 있도록 사용할 고유 코드를 생성한다.
+		String alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		StringBuilder rCode = new StringBuilder();
+		Random r = new Random();
+		for(int i = 0; i < 20; i++) {
+			int rand = r.nextInt(62);
+			rCode.append(alphabet.charAt(rand));
+		}
+		System.out.println(rCode);
+		String authCode = rCode.toString();
 		// 파일명에 UUID를 더한다.
-		String saveFileName = uid.toString() + "_" + vo.getImg().getOriginalFilename();
+		String saveFileName = authCode + "_" + vo.getImg().getOriginalFilename();
+		
+		// 회원 이메일, 회원 비밀번호, 회원 이름을 암호화한다 (SHA256 & AES256)
+		String email = vo.getEmail();
+		vo.setEmail(aes256.encrypt(email));
+		String name = vo.getName();
+		vo.setName(aes256.encrypt(name));
+		String password = vo.getPw();
+		vo.setPw(sha256.encrypt(password));
+		
+		authCode = sha256.encrypt(authCode);
 		
 		mapper = template.getMapper(UserMapper.class);
 		// users 테이블에 사용자 정보를 추가한다.
-		int result = mapper.createUser(vo);
+		int result = mapper.createUser(vo, authCode);
 		
 		if(!vo.getImg().isEmpty()) { // UserVO 객체의 img 변수가 비어있지 않는다면...
-			// 사용자가 업로드한 파일을 지정된 위치로 이동시킨다. 
+			// 사용자가 업로드한 파일을 지정된 위치로 이동시킨다.
 			vo.getImg().transferTo(new File(dir, saveFileName));
-			String imgName = saveFileName;
+			// 업로드한 파일명을 암호화한다.
+			saveFileName = aes256.encrypt(saveFileName);
 			// users_attach 테이블에 파일명을 사용자 ID(auto_increment)와 함께 추가한다.
-			mapper.addAttach(imgName);
+			mapper.addAttach(saveFileName);
 		}
+		
+		service.executeJoin(email, authCode);
 		
 		return result;
 	}

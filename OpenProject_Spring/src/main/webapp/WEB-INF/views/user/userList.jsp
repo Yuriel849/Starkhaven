@@ -154,7 +154,7 @@
             			alert("회원정보를 수정하는데 실패했습니다. 다시 시도해주세요.");
             		},
             		success : function(data) {
-            			alert("성공적으로 삭제했습니다.");
+            			alert("성공적으로 수정했습니다.");
             			console.log("data : " + data);
 						$('.tableBody').empty().append(data);
 						cnt = 0;

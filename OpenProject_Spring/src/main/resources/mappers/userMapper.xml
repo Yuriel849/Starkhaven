@@ -5,7 +5,7 @@
 
 <mapper namespace="com.yuriel.persistence.UserMapper">
 	<insert id="createUser">
-		insert into users (email, name, pw) values (#{email}, #{name}, #{pw})
+		insert into users (email, name, pw, auth, authCode) values (#{vo.email}, #{vo.name}, #{vo.pw}, 0, #{authCode})
 	</insert>
 	
 	<select id="login" resultType="UserVO">

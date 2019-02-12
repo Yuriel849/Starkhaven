@@ -36,6 +36,32 @@
 		<beans:property name="defaultEncoding" value="UTF-8"></beans:property>
 	</beans:bean>
 	
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<beans:property name="host" value="smtp.gmail.com" />
+		<beans:property name="port" value="587" />
+		<!--
+			Designated ports for the SMTP may be changed by the email service provider, so DOUBLE-CHECK!
+			(Each provider may use a different port for the SMTP)
+			
+			Port 25 was the original port for the SMPT protocol, but it's rarely used nowadays
+			Port 465 was one of the ports for the SMPT protocol, but it's not used much nowadays
+		  -->
+		<beans:property name="username" value="[이메일주소]" />
+			<!-- Although it is possible to set a sender using the setFrom() method,
+				 the actual sender (email address) is the value of this property "username" -->
+		<beans:property name="password" value="[비밀번호]" />
+		<beans:property name="defaultEncoding" value="utf-8" />
+		<beans:property name="javaMailProperties">
+			<!-- Additional properties required by GMAIL (other providers may differ) -->
+			<beans:props>
+				<beans:prop key="mail.transport.protocol">smtp</beans:prop>
+				<beans:prop key="mail.smtp.auth">true</beans:prop>
+				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+				<beans:prop key="mail.debug">true</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+	
 	<!-- Set up interceptors -->
 <!-- 	<interceptors>
 		<interceptor>
@@ -44,7 +70,10 @@
 		</interceptor>
 	</interceptors> -->
 
+	<!-- @Transactional 애너테이션 활성화 설정 -->
+		<!-- "tx:annotation-driven" must be together with "context:component-scan" in the servlet-context.xml -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 	<!-- Scans all packages under "com.yuriel" for beans (@Controller, @Service, @Component, etc.) -->	
 	<context:component-scan base-package="com.yuriel" />
-	
 </beans:beans>

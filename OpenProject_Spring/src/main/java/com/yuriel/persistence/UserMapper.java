@@ -11,7 +11,7 @@ public interface UserMapper {
 	String namespace = "com.yuriel.persistence.UserMapper";
 	
 	// userMapper.xml에서의 ID == UserMapper 메서드의 이름 -> createUser
-	public int createUser(UserVO vo) throws Exception;
+	public int createUser(@Param("vo") UserVO vo, @Param("authCode") String authCode) throws Exception;
 	
 	public UserVO login(UserVO vo) throws Exception;
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yuriel.persistence.AuthMapper">
+	<select id="selectOneAuth" resultType="AuthDTO">
+		select email, authCode from users where email = #{email}
+	</select>
+	
+	<update id="deleteAuthCode">
+		update users set auth = 1, authCode = null where email = #{email}
+	</update>
+</mapper>
