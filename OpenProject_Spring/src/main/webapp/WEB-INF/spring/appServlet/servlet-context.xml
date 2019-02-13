@@ -76,4 +76,5 @@
 
 	<!-- Scans all packages under "com.yuriel" for beans (@Controller, @Service, @Component, etc.) -->	
 	<context:component-scan base-package="com.yuriel" />
+	
 </beans:beans>
