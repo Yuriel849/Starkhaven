@@ -5,4 +5,4 @@ A repository of my studies of Node.js <br>
 > Basics of Node.js <br>
 > Create a basic real-time chatting app with Node.js <br>
 > Create a basic to-do list app with Node.js <br>
-> Test sending a request from a Java class with Spring and receiving with Node.js (failure)
+> Spring & Node projects to test sending a request from a Java class with Spring and receiving with Node.js (failure)
