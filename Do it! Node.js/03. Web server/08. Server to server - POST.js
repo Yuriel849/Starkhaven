@@ -25,7 +25,7 @@ var req = http.request(opts, function(res) {
     });
 });
 
-// Unlike GET method, POST method requires me to set the request header and body
+// Unlike GET method, POST method requires user to set the request header and body
 opts.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 req.data = 'q=actor'; // request's 'data' attribute is the request parameters
 opts.headers['Content-Length'] = req.data.length;
