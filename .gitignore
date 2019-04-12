@@ -101,4 +101,7 @@ hs_err_pid*
 ## ignoring target file
 target/
 
+# Ignore node_modules directory (contains module files)
+node_modules
+
 # End of https://www.gitignore.io/api/java,eclipse,java-web
