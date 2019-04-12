@@ -2,7 +2,7 @@
         require(filename) calls the module with the designated filename (i.e. calls the designated JS file)
             -> the filename should NOT include the '.js' extension
             -> if a file with the designated filename does not exist, node searches for a directory with the filename;
-                    if a directory with the filename exists, then node will instead call the module within that directory
+                    if a directory with the filename exists, then node will instead call the 'index.js' file within that directory
         require(filename) returns the exports object within the designated module,
             and then the returned object can be assigned to a variable in the main file;
             thus the returned object == exports object within the designated module
