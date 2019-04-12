@@ -1,4 +1,8 @@
-/* Use 'http' module to request data from another server, with which to response to request */
+/* Use 'http' module to request data from another server, with which to response to request
+
+   Error when this file is run,
+        perfectly natural as 'www.google.com' doesn't accept POST requests
+*/
 var http = require('http');
 
 var opts = {
