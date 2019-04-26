@@ -4,7 +4,7 @@ setInterval(() => {
         console.log('종료!');
         process.exit(); // Terminates a currently running Node process
                         // If used on a server, the server terminates as well, so rarely used on servers
-            // process.exit() can receive parameters -> No parameter or parameter of 1 means proper termination
+            // process.exit() can receive parameters -> No parameter means proper termination (Node.js uses default code '0')
                                                   // -> Parameter of 1 means termination from error
     }
     console.log(i);
