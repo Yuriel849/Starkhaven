@@ -1,8 +1,10 @@
-// The WHATWG method of working with URLs returns the query string as the searchParams object
-    /* searchParams object is useful because...
-        the WHATWG method automatically turns the query string into the searchParams object
-        the older Node method requires the querystring module to turn the query string into an easily useable object
-     */
+/*
+FIRST SEE THE 'url.js' FILE!
+    The WHATWG method of working with URLs returns the query string as the searchParams object
+        searchParams object is useful because...
+            the WHATWG method automatically turns the query string into the searchParams object
+            the older Node method requires the querystring module to turn the query string into an easily useable object
+ */
 
 const { URL } = require('url');
 
@@ -20,7 +22,7 @@ myURL.searchParams.append('filter', 'es3'); // 'filter'라는 key와 'es3'라는
 myURL.searchParams.append('filter', 'es5');
 console.log(myURL.searchParams.getAll('filter'));
 
-myURL.searchParams.set('filter', 'es6'); // 'filter'라는 키의 모든 값을 지우고 'es6'로 새로 추가한다.
+myURL.searchParams.set('filter', 'es6'); // 'filter'라는 키의 모든 값을 지우고 값이 'es6'인 새로운 키를 추가한다.
 console.log(myURL.searchParams.getAll('filter'));
 
 myURL.searchParams.delete('filter'); // 'filter'라는 키와 값을 제거한다.

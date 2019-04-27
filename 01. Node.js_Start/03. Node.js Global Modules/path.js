@@ -1,7 +1,7 @@
 // The path module is used to work with folder and file paths
 const path = require('path');
 
-const string = __filename;
+const string = __filename; // 파일경로
 
 console.log('path.sep : ', path.sep); // 경로의 구분자 (Windows에서는 "\", POSIX에서는 "/")
 console.log('path.delimiter : ', path.delimiter); // 환경변수의 구분자 (Windows에서는 ";", POSIX에서는 ":")
