@@ -8,5 +8,5 @@ const array = [Buffer.from('띄엄 '), Buffer.from('띄엄 '), Buffer.from('띄�
 const buffer2 = Buffer.concat(array); // concat(array) -> Combines the buffers in designated array into one buffer
 console.log('concat() : ', buffer2.toString());
 
-const buffer3 = Buffer.alloc(5); // alloc([bytes]) -> Creates an empty buffer (optional, designate size of to-be-created buffer in bytes)
+const buffer3 = Buffer.alloc(5); // alloc([bytes]) -> Creates an empty buffer (optionally designate size in bytes)
 console.log('alloc() : ', buffer3);
