@@ -1,5 +1,5 @@
 # Node.js
-A repository of my studies of Node.js <br>
+A repository of my studies of Node.js, in some cases utilizing online tutorials and guides <br>
 
 ### Start studying Node.js
 > 01. Basics of Node.js <br>
