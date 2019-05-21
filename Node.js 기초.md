@@ -1,0 +1,1 @@
+Install latest npm: command "npm install -g npm"
