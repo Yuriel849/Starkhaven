@@ -2,10 +2,10 @@
 
 ### 1. "global"
 > Global object same as a browser's "window" object
->> "window" & "document" objects CANNOT be used in Node.js (there's no DOM or BOM)
+>> "window" & "document" objects CANNOT be used in Node.js (there's no DOM or BOM) <br>
 > 사용할 때 “global.”은 생략해도 된다.
->> ex) global.require() => require()
->> ex) global.console.log() => console.log()
+>> ex) global.require() => require() <br>
+ex) global.console.log() => console.log()
 
 ### 2. Console
 > Unlike the browser's "console" object, which is contained in the "window" object, Node.js' "console" object is in the "global" object
