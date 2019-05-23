@@ -3,6 +3,7 @@
 ### 1. "global"
 > Global object same as a browser's "window" object
 >> "window" & "document" objects CANNOT be used in Node.js (there's no DOM or BOM) <br>
+
 > 사용할 때 “global.”은 생략해도 된다.
 >> ex) global.require() => require() <br>
 ex) global.console.log() => console.log()
