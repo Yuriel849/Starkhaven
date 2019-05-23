@@ -10,14 +10,16 @@ ex) global.console.log() => console.log()
 
 ### 2. Console
 > Unlike the browser's "console" object, which is contained in the "window" object, Node.js' "console" object is in the "global" object
+
 > console methods
->> console.time(레이블) & console.timeEnd(레이블) => 같은 레이블을 가진 time & timeEnd 사이의 시간을 측정한다.
->> Console.log(내용) => 평범한 로그를 콘솔(==터미널)에 출력한다.
->> Console.error(내용) => 에러 내용을 콘솔에 출력한다.
->> Console.dir(객체, 옵션) => 1st 인자는 객체, 2nd 인자는 옵션
->>> 옵션이 "colors: true"하면 콘솔 문자에 색을 더해서 가독성을 향상시킨다.
->>> 옵션이 "depth: 숫자"이면 객체 안의 몇번째 단계까지 보여줄지를 결정한다 (기본값 = 2)
->> Console.trace(레이블)  에러가 어디서 발생했는지 추적할 수 있게 해준다. 레이블의 위치까지 가는 trace를 출력한다.
+>> console.time(레이블) & console.timeEnd(레이블) => 같은 레이블을 가진 time & timeEnd 사이의 시간을 측정한다. <br>
+>> Console.log(내용) => 평범한 로그를 콘솔(==터미널)에 출력한다. <br>
+>> Console.error(내용) => 에러 내용을 콘솔에 출력한다. <br>
+>> Console.dir(객체, 옵션) => 1st 인자는 객체, 2nd 인자는 옵션 <br>
+>>> 옵션이 "colors: true"하면 콘솔 문자에 색을 더해서 가독성을 향상시킨다. <br>
+>>> 옵션이 "depth: 숫자"이면 객체 안의 몇번째 단계까지 보여줄지를 결정한다 (기본값 = 2) <br>
+
+>> Console.trace(레이블) => 에러가 어디서 발생했는지 추적할 수 있게 해준다. 레이블의 위치까지 가는 trace를 출력한다.
 
 ### 3. setTimeout / setInterval / setIntermediate
 global 객체에 포함된 타이머 기능
