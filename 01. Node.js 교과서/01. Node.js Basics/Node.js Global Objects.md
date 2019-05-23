@@ -15,7 +15,7 @@
 >> Console.error(내용) => 에러 내용을 콘솔에 출력한다.
 >> Console.dir(객체, 옵션) => 1st 인자는 객체, 2nd 인자는 옵션
 >>> 옵션이 "colors: true"하면 콘솔 문자에 색을 더해서 가독성을 향상시킨다.
-옵션이 "depth: 숫자"이면 객체 안의 몇번째 단계까지 보여줄지를 결정한다 (기본값 = 2)
+>>> 옵션이 "depth: 숫자"이면 객체 안의 몇번째 단계까지 보여줄지를 결정한다 (기본값 = 2)
 >> Console.trace(레이블)  에러가 어디서 발생했는지 추적할 수 있게 해준다. 레이블의 위치까지 가는 trace를 출력한다.
 
 ### 3. setTimeout / setInterval / setIntermediate
