@@ -13,7 +13,7 @@ const parseCookies = (cookie = '') =>
             return acc;
         }, {}); // changes cookie string such as 'name=puppy;age=10' into object { name : 'puppy', age = '10' })
 
-const session = {}; // object within server (does not go to client) to store the user's name and cookie's date of expiry
+const session = {}; // 'session' object in server (doesn't go to client) to store user's name and cookie's date of expiry
                     // cookie is simply a number (cookie's time of creation as a number)
 
 http.createServer((req, res) => {
