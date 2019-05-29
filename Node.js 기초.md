@@ -18,3 +18,30 @@ Abbreviations
 > npm install => npm i <br>
 --save-dev => -D <br>
 --global -g <br>
+
+Package versions (SemVer, Semantic Versioning)
+> A.B.C (ex) 1.5.2) <br>
+A => major version (major update, not compatible with earlier versions) <br>
+B => minor version (minor update, backwards-compatible with earlier versions) <br>
+C => patch version (very minor update, i.e. fixing a bug) <br>
+
+> Related package.json icons
+"^" => install/update without changing the major version (ex) ^1.1.1 => 1.1.1 <= version < 2.0.0) <br>
+"~" => install/update without changing the minor version (ex) ~1.1.1 => 1.1.1 <= version < 1.2.0) <br>
+">", "<", ">=", "<=", "=" => greater than, lesser than, equal too, etc. (ex) >1.1.1 => version higher than 1.1.1) <br>
+"@latest" OR "@x" => always installs the latest version of the package
+
+Other npm commands
+npm outdated => checks whether there are updatable packages
+npm update [package] => updates the designated package
+npm update => updates all updatable packages
+npm uninstall [package] OR npm rm [package] => uninstalls the designated package (disappears from node_modules & package.json)
+npm search [query] => searches npm packages for the query (keywords attribute in package.json also show up)
+npm info [package] => shows info about the designated package, the contents of package.json, dependencies, installable versions, etc.
+npm adduser => used for logging in on npm (used to publish packages)
+npm whoami => if logged in, shows WHO is logged in
+npm logout => logs out (reverse of npm adduser)
+npm version [version] => updates version of package.json
+npm deprecate [package][version] [message] => when someone installs the designated version of the package, a deprecated warning shows up
+npm publish => used to publish my packages
+npm unpublish => used to withdraw my published packages (only works within 24 hours of publication)
