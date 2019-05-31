@@ -65,7 +65,7 @@ uses the cookie-parser & express-session middlewares, so MUST be placed after th
 flash middleware adds the req.flash method to the request object <br>
 add a key and value with req.flash(key, value) and get the value for a key with req.flash(key) <br>
 
-07. var router = express.Router();
+7. var router = express.Router();
 > if router URL is "/users/:id" and client uses "/users/123?limit=5", <br>
 123 matches with :id, and is stored in req.params and limit : 5 is stored in req.query as <br>
 req.params = { id : '123' } <br>
@@ -82,3 +82,7 @@ res.render() => used to render the template engine <br>
 
 > to manually set the HTTP status code when responding, <br>
 ex) res.status(404).send('NOT FOUND');
+
+8. Template engines => PUG & EJS
+> Template engines enable the rendering of HTML files with JavaScript <br>
+SEE "views/tutorial.pug"
