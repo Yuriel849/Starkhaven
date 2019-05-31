@@ -85,4 +85,10 @@ ex) res.status(404).send('NOT FOUND');
 
 8. Template engines => PUG & EJS
 > Template engines enable the rendering of HTML files with JavaScript <br>
-SEE "views/tutorial.pug"
+PUG => SEE "views/tutorial.pug" <br>
+EJS
+>> EJS is similar to Java's JSP & is HTML with JavaScript codes <br>
+Variables => Surrounded by "<%= %>" <br>
+JavaScript => Codes surrounded by "<% %>" <br>
+To not change special characters into HTML entities => Use "<%- %>" instead of "<%= %>" <br>
+To include HTML files => Use "<%- include([file path], [data]) %>"
