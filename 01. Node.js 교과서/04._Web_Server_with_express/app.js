@@ -63,6 +63,7 @@ app.use(session({
 // connect-flash (MUST BE PLACED AFTER cookie-parser AND express-session)
 app.use(flash());
 
+// may use app.get(), app.post(), app.put(), app.patch(), app.delete() INSTEAD OF app.use()
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
