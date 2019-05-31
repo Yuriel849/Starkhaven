@@ -12,8 +12,10 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views')); // designates the folder where template files are stored,
+                                                 // this is where res.render() searches for template files
+                                                 // (ex) "res.render('admin/help')" => searches for "views/admin/help.pug")
+app.set('view engine', 'pug'); // designates which template engine to use; here, PUG
 
 // custom middleware - 1
 app.use(function(req, res, next) {
