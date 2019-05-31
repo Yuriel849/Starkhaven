@@ -1,0 +1,100 @@
+doctype html
+html <!-- no "<>" for tags and no closing tags -->
+  head <!-- parent-child relationships indicated by tabs or spaces -->
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css') <!-- attributes defined in "()" directly after tags -->
+  body
+    h1= title
+    p Welcome to #{title} <!-- for HTML text, simply insert space between tag and text => same as <p>Welcome to #{title}</p> -->
+    button.title(type='submit') 전송 <!-- same as <button class="[title variable]" type="submit">전송</button> -->
+    span#Hello <!-- id attributes expressed by preceding with "#" => same as <span id="Hello"> -->
+    p.apple.banana <!-- class attributes expressed by preceding with "." => same as <p class="apple banana"> -->
+    p
+        | 안녕하세요.
+        | 여러 줄을 입력합니다.
+        br
+            | 태그도 중간에 넣을 수 있습니다.
+    //- the above becomes : 
+        <p> 안녕하세요. 여러 줄을 입력합니다. <br /> 여러 줄을 입력합니다.</p>
+
+    //- to use style tags or script tags, simply add "." to end of "style" or "script"
+    script.
+        var message = "PUG";
+        alert(message);
+    //- the above becomes : 
+            <script>
+                var message = "PUG";
+                alert(message);
+            </script>
+    
+    //- JavaScript variables can be used in PUG
+        from without, can send variables to the template by :
+            1.
+            "router.get('/', function(req, res, next) {
+                res.render('index', { title : 'Express' }) => the variable 'title' with value 'Express'
+            });"
+
+            2.
+            "router.get('/', function(req, res, next) {
+                res.locals.title = 'Express' => in the res.locals object, the variable 'title' with value 'Express'
+                res.render('index')
+            });"
+            advantage of using res.locals object is that other middlewares can use the same variables,
+                    and other middlewares can set the variables before it is used in res.render()
+        
+        to use JavaScript variables in a PUG file
+            can be used as
+                #{title} => when putting the variable in the middle of other text
+                =title => when using the variable as text
+            what is inside "#{}" and after "=" are considered JavaScript codes
+        
+        it is also possible to declare JavaScript variables inside a PUG file
+            simply use "-" (hyphen) before the JavaScript code
+                ex)
+                - var node = 'Node.js'
+                - var js = 'JavaScript'
+                p #{node} & #{js}
+                    => becomes <p>Node.js & JavaScript</p>
+        
+        special characters are changed to HTML entities
+            ex) "<" => "&lt;"
+            this is because special characters such as "<strong>" can be mistaken for HTML tags
+            in order to use special characters as they are, simply use "!=" instead of "=" for variables
+
+    //- JavaScript loops can be used in PUG (only when the variable can be looped)
+        ex)
+            "each fruit in ['apple', 'banana', 'carrot']
+            li= fruit"
+            => becomes <li>apple</li><li>banana</li><li>carrot</li>
+
+            "each fruit, index in ['apple', 'banana', 'carrot']
+            li= (index+1) + '. ' + fruit"
+            => becomes <li>1. apple</li><li>2. banana</li><li>3. carrot</li>
+
+    //- JavaScript conditional statements can be used in PUG
+        ex)
+        if loggedIn
+            div XXX
+        else
+            div YYY
+
+        case fruit
+            when 'apple'
+                div XXX
+            when 'banana'
+                div YYY
+            default
+                div ZZZ
+    
+    //- Other HTML files may be included
+        "include [file name]" -> includes the designated HTML file at this location
+
+    //- "extends" & "block"
+        Create a common layout file, then designate "blocks" for the parts that change
+            ex)
+            layout.pug => use "block title"
+            index.pug => use "extends layout" & "block title"
+                "extends layout" designates the layout file
+                "block title" => inserted codes following this are considered the contents of the block
+                                    and are inserted into the designated location in the layout file
+
