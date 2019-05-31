@@ -22,8 +22,10 @@ views => 템플릿 파일이 위치 (MVC의 view) <br>
 요청과 응답 중간에 위치한다고 하여 middleware, 사실상 요청을 받고 응답을 하기까지의 모든 과정을 middleware에서 처리 <br>
 next() => essential, this is what connects one middleware to the next <br>
 >> if no argument, simply connects to the next middleware <br>
-if argument is 'route', connects to the (next) router <br>
 if argument is anything else, connects to the error handler and the argument is considered to the data about the error, and connects to the err parameter in the error handler <br>
+if argument is 'route' AND WHEN USED WITH "express.Router()" object, skips middleware and connects to the next router with same address <br>
+>>> ex) router.get('/', middleware1{next('route');}, middleware2, middleware3); router.get('/', middleware4); <br>
+here, middleware1 is called, encounters "next('route')" and skips middleware2 & middleware3, proceeding to the next router with the same address and middleware4
 
 > 1. morgan
 >> used to print log about request on the console <br>
@@ -62,3 +64,21 @@ creates req.session object in the request object... use this req.session object 
 uses the cookie-parser & express-session middlewares, so MUST be placed after them <br>
 flash middleware adds the req.flash method to the request object <br>
 add a key and value with req.flash(key, value) and get the value for a key with req.flash(key) <br>
+
+07. var router = express.Router();
+> if router URL is "/users/:id" and client uses "/users/123?limit=5", <br>
+123 matches with :id, and is stored in req.params and limit : 5 is stored in req.query as <br>
+req.params = { id : '123' } <br>
+req.query = { limit : '5', skip : '10' }
+
+> when router responds to client's request, uses <br>
+>> res.send() => can be used to send buffer data, strings, HTML codes, JSON strings as responses <br>
+res.sendFile() => sends file as response (argument is file's path) <br>
+res.json() => sends JSON strings as response <br>
+res.redirect() => redirects (argument is address) <br>
+res.render() => used to render the template engine <br>
+
+> only one response to one request, cannot send multiple responses <br>
+
+> to manually set the HTTP status code when responding, <br>
+ex) res.status(404).send('NOT FOUND');
