@@ -45,3 +45,12 @@ npm version [version] => updates version of package.json
 npm deprecate [package][version] [message] => when someone installs the designated version of the package, a deprecated warning shows up
 npm publish => used to publish my packages
 npm unpublish => used to withdraw my published packages (only works within 24 hours of publication)
+
+#### Sequelize library
+ORM (maps relation between JavaScript objects and database relations)
+Connects Node.js with a database like MySQL and assists with using said database, changes JavaScript code into SQL
+npm commands
+> npm i sequelize mysql2 <br>
+npm i -g sequelize-cli <br>
+sequelize init
+
