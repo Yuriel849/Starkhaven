@@ -6,8 +6,13 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var sequelize = require('./models').sequelize;
+/* require('./models') === require('./models/index.js')
+      can omit the name of the file "index.js" when using require
+ */
 
 var app = express();
+sequelize.sync(); // syncs with MySQL when the server is started
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
