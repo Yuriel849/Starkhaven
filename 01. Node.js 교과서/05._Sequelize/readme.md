@@ -49,3 +49,13 @@ Op.notIn = not in (not an element in an array) <br>
     limit: 1,
     offset: 1,
 });
+### UPDATE TABLE SET A = 'B' WHERE C = D;
+> User.update({ <br>
+    A: 'B', <br>
+}, { <br>
+    where: { C: D } <br>
+});
+### DELETE FROM TABLE WHERE A = B;
+> User.destroy({ <br>
+    where: { A: B }, <br>
+});
