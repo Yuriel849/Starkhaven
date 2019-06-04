@@ -2,9 +2,10 @@ var express = require('express');
 var { User, Comment } = require('../models');
 var router = express.Router();
 
+/* GET "/comments/:id" => get list of comments */
 router.get('/:id', function(req, res, next) {
     Comment.findAll({
-        include: {
+        include: { // "include" option only useable if using "hasMany" OR "belongsTo"
             model: User,
             where: { id: req.params.id },
         },
@@ -19,6 +20,7 @@ router.get('/:id', function(req, res, next) {
         });
 });
 
+/* POST "/comments" => add new comment */
 router.post('/', function(req, res, next) {
     Comment.create({
         commenter: req.body.id,
@@ -34,8 +36,10 @@ router.post('/', function(req, res, next) {
         });
 });
 
+/* PATCH "/comments/:id" => update existing comment */
 router.patch('/:id', function(req, res, next) {
     Comment.update({ comment: req.body.comment }, { where: { id: req.params.id } })
+                // 1st argument is which column, 2nd argument is the codition for finding which row
         .then((result) => {
             res.json(result);
         })
@@ -45,6 +49,7 @@ router.patch('/:id', function(req, res, next) {
         });
 });
 
+/* DELETE "/comments/:id" => delete existing comment */
 router.delete('/:id', function(req, res, next) {
     Comment.destroy({ where: { id: req.params.id } })
         .then((result) => {

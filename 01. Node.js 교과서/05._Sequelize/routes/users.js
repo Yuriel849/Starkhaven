@@ -2,7 +2,7 @@ var express = require('express');
 var User = require('../models').User;
 var router = express.Router();
 
-/* GET users listing. */
+/* GET "/users" => get list of users */
 router.get('/', function(req, res, next) {
   User.findAll()
     .then((users) => {
@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-/* POST new user */
+/* POST "/users" => add new user */
 router.post('/', function(req, res, next) {
   User.create({
     name: req.body.name,
