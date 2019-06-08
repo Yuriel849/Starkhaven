@@ -5,11 +5,13 @@ MongoDB basically uses the same data types as JavaScript, with some differences
 >> USES ObjectId, Binary Data, Timestamp, Int, Long, Decimal, JavaScript, etc. <br>
 DOES NOT USE Undefined, Symbol
 <br>
+
 ### MongoDB & MySQL
 > Collection is analagous to table <br>
 Document is analagous to row <br>
 Field is analagous to column <br>
 <br>
+
 ### To use, open a command-line interface and start the server...
 > mongod --auth
 ### ...then, open another command-line interface and login...
@@ -33,6 +35,7 @@ If successful, the response should be "WriteResult({ "nInserted": 1 })
 7. db.<COLLECTION NAME>.find({ name: <NAME> }, { _id: 1 })
 > Find the field with the designated name and get the _id (data type is ObjectId)
 <br>
+
 ### Get started with MongoDB Compass; after logging in...
 1. Click 'CREATE DATABASE', enter 'Database Name' and 'Collection Name', then create
 2. Enter a database and click 'CREATE COLLECTION', enter the 'Collection Name', then create
