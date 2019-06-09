@@ -31,26 +31,35 @@ C => patch version (very minor update, i.e. fixing a bug) <br>
 ">", "<", ">=", "<=", "=" => greater than, lesser than, equal too, etc. (ex) >1.1.1 => version higher than 1.1.1) <br>
 "@latest" OR "@x" => always installs the latest version of the package
 
-Other npm commands
-npm outdated => checks whether there are updatable packages
-npm update [package] => updates the designated package
-npm update => updates all updatable packages
-npm uninstall [package] OR npm rm [package] => uninstalls the designated package (disappears from node_modules & package.json)
-npm search [query] => searches npm packages for the query (keywords attribute in package.json also show up)
-npm info [package] => shows info about the designated package, the contents of package.json, dependencies, installable versions, etc.
-npm adduser => used for logging in on npm (used to publish packages)
-npm whoami => if logged in, shows WHO is logged in
-npm logout => logs out (reverse of npm adduser)
-npm version [version] => updates version of package.json
-npm deprecate [package][version] [message] => when someone installs the designated version of the package, a deprecated warning shows up
-npm publish => used to publish my packages
+Other npm commands <br>
+npm outdated => checks whether there are updatable packages <br>
+npm update [package] => updates the designated package <br>
+npm update => updates all updatable packages <br>
+npm uninstall [package] OR npm rm [package] => uninstalls the designated package (disappears from node_modules & package.json) <br>
+npm search [query] => searches npm packages for the query (keywords attribute in package.json also show up) <br>
+npm info [package] => shows info about the designated package, the contents of package.json, dependencies, installable versions, etc. <br>
+npm adduser => used for logging in on npm (used to publish packages) <br>
+npm whoami => if logged in, shows WHO is logged in <br>
+npm logout => logs out (reverse of npm adduser) <br>
+npm version [version] => updates version of package.json <br>
+npm deprecate [package][version] [message] => when someone installs the designated version of the package, a deprecated warning shows up <br>
+npm publish => used to publish my packages <br>
 npm unpublish => used to withdraw my published packages (only works within 24 hours of publication)
 
 #### Sequelize library
-ORM (maps relation between JavaScript objects and database relations)
+Use for RDBMS such as MySQL <br>
+ORM (Object-Relationing Mapping) => maps JavaScript objects and database relations <br>
 Connects Node.js with a database like MySQL and assists with using said database, changes JavaScript code into SQL
 npm commands
 > npm i sequelize mysql2 <br>
 npm i -g sequelize-cli <br>
 sequelize init
 
+#### mongoose library
+Use for MongoDB <br>
+ODM (Object Doccument Mapping) <br>
+Provides various convenient functions that MongoDB lacks <br>
+> Provides schema on server side (filters data before putting in MongoDB) <br>
+Provides populate method (similar to JOIN function in RDBMS)
+npm commands
+>  npm i mongoose
