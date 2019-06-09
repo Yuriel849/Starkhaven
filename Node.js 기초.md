@@ -60,6 +60,7 @@ Use for MongoDB <br>
 ODM (Object Doccument Mapping) <br>
 Provides various convenient functions that MongoDB lacks <br>
 > Provides schema on server side (filters data before putting in MongoDB) <br>
+
 Provides populate method (similar to JOIN function in RDBMS)
 npm commands
->  npm i mongoose
+>  npm i mongoose <br>
