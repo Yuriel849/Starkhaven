@@ -13,7 +13,8 @@ A repository of my studies of Node.js, in some cases utilizing online tutorials 
 &nbsp;&nbsp;&nbsp;&nbsp; npm Basics <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Web Server with 'express' module <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Use MySQL DB with Sequelize library <br>
-&nbsp;&nbsp;&nbsp;&nbsp; Use MongoDB <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Use MongoDB with Mongoose library <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Make a SNS service with express, Sequelize & MySQL <br>
 ### 02. Node.js_Chat
 &nbsp;&nbsp;&nbsp;&nbsp; Create a basic real-time chatting app with Node.js <br>
 ### 03. Node.js_ToDo
