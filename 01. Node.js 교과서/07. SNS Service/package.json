@@ -1,0 +1,28 @@
+{
+  "name": "sns_service_project",
+  "version": "0.0.1",
+  "description": "\"SNS service made with express\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yuriel849/Node.js.git"
+  },
+  "author": "Yuriel849",
+  "license": "ISC",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "morgan": "^1.9.1",
+    "mysql2": "^1.6.5",
+    "pug": "^2.0.3",
+    "sequelize": "^5.8.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
