@@ -4,13 +4,16 @@ const morgan = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport'); // same as require('./passport/index.js')
 require('dotenv').config();
 
 const pageRouter = require('./routes/page');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 const app = express();
 sequelize.sync();
+passportConfig(passport);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,6 +34,8 @@ app.use(session({
     },
 }));
 app.use(flash());
+app.use(passport.initialize()); // adds passport data to request object
+app.use(passport.session()); // adds passport data to req.session object; must be situated after express-session middleware
 
 app.use('/', pageRouter);
 
