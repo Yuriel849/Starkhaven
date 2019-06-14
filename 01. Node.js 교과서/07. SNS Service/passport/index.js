@@ -30,7 +30,18 @@ module.exports = (passport) => {
 
     // "deserializeUser" is called upon every request by "passport.session()" middleware
     passport.deserializeUser((id, done) => { // receives user.id from session in "id" argument
-        User.find({ where: { id } }) // searches database for data with that id
+        User.find({
+            where: { id },
+            include: [{
+                model: User,
+                attributes: ['id', 'nick'], // specify which columns to send, in case password is sent accidentally
+                as: 'Followers',
+            }, {
+                model: User,
+                attributes: ['id', 'nick'],
+                as: 'Followings',
+            }],
+        }) // searches database for data with that id
             .then(user => done(null, user)) // saves data from database in req.user object
             .catch(err => done(err));
     });
