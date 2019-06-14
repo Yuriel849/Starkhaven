@@ -63,4 +63,14 @@ router.get('/logout', isLoggedIn, (req, res) => {
     res.redirect('/');
 });
 
+/* GET "/auth/kakao" => when logging in, redirects to Kakao's login page */
+router.get('/kakao', passport.authenticate('kakao'));
+
+/* GET "/auth/kakao/callback" => receives result of attempt to log in through Kakao's login page */
+router.get('/kakao/callback', passport.authenticate('kakao', { // no callback for passport.authenticate()
+    failureRedirect: '/', // if login fails
+}), (req, res) => { // next middleware, designates where to go to if login is successful
+    res.redirect('/');
+});
+
 module.exports = router;

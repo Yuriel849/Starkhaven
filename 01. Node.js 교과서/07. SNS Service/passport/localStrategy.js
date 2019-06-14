@@ -5,8 +5,8 @@ const { User } = require('../models');
 
 module.exports = (passport) => {
     passport.use(new LocalStrategy({
-        usernameField: 'email', // designate which values in req.body to use
-        passwordField: 'password',
+        usernameField: 'email', // "usernameField" & "passwordField" are variables in passport-local =>
+        passwordField: 'password', // =>  these 2 lines designate which values in req.body to use
     }, async (email, password, done) => {
            // 1st & 2nd arguments from above 2 lines, 3rd argument "done" is callback of passport.authenticate()
            // done(A, B, C) => passport.authenticate('local', (A, B, C) => {})

@@ -8,6 +8,7 @@ const passport = require('passport'); // same as require('./passport/index.js')
 require('dotenv').config();
 
 const pageRouter = require('./routes/page');
+const authRouter = require('./routes/auth');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
@@ -38,6 +39,7 @@ app.use(passport.initialize()); // adds passport data to request object
 app.use(passport.session()); // adds passport data to req.session object; must be situated after express-session middleware
 
 app.use('/', pageRouter);
+app.use('/auth', authRouter);
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
