@@ -4,7 +4,7 @@ const { User } = require('../models');
 
 module.exports = (passport) => {
     passport.use(new KakaoStrategy({
-        clientID: process.env.KAKAO_ID, // "clientID" is provided by Kakao, save in process.env for greater security
+        clientID: process.env.KAKAO_ID, // "clientID" is unique to service & provided by Kakao, saved in .env for greater security
         callbackURL: '/auth/kakao/callback',
             /* "callbackURL" designates router address where this server will receive result of authentication from Kakao
                     Kakao sends "accessToken", "refreshToken", and "profile" to the designated "callbackURL"
