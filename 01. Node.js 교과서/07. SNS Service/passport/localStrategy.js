@@ -11,7 +11,7 @@ module.exports = (passport) => {
            // 1st & 2nd arguments from above 2 lines, 3rd argument "done" is callback of passport.authenticate()
            // done(A, B, C) => passport.authenticate('local', (A, B, C) => {})
         try {
-            const exUser = await User.find({ where: { email } });
+            const exUser = await User.findOne({ where: { email } });
             if(exUser) {
                 const result = await bcrypt.compare(password, exUser.password);
                 if(result) {

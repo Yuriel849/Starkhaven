@@ -30,7 +30,7 @@ module.exports = (passport) => {
 
     // "deserializeUser" is called upon every request by "passport.session()" middleware
     passport.deserializeUser((id, done) => { // receives user.id from session in "id" argument
-        User.find({
+        User.findOne({
             where: { id },
             include: [{
                 model: User,
